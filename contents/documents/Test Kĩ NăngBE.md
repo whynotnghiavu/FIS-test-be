@@ -31,7 +31,6 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- @ 3. Test đầu api trên postman -->
 
-# def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 <!-- fastapi dev a.py -->
 
