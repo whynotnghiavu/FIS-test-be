@@ -5,12 +5,19 @@ from ..database import get_db
 from ..schemas import category as _schemas_category
 from ..services import category as _services_category
 
+from ..services.role_checker import RoleChecker
+from typing import Annotated
+
 
 router = APIRouter()
 
 
 @router.post("", response_model=_schemas_category.Category)
-def create_category(category: _schemas_category.CategoryCreate, db: Session = Depends(get_db)):
+def create_category(
+    category: _schemas_category.CategoryCreate,
+    _: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin"]))],
+    db: Session = Depends(get_db)
+):
     return _services_category.create(category, db)
 
 
@@ -28,7 +35,12 @@ def get_one_category_by_id(category_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{category_id}", response_model=_schemas_category.Category)
-def update_category(category_id: int, category: _schemas_category.CategoryUpdate, db: Session = Depends(get_db)):
+def update_category(
+    category_id: int,
+    category: _schemas_category.CategoryUpdate,
+    _: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin"]))],
+    db: Session = Depends(get_db)
+):
     updated_category = _services_category.update(category_id, category, db)
     if updated_category is None:
         raise HTTPException(status_code=404, detail="Category not found")

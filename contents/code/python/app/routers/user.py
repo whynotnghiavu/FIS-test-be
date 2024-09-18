@@ -21,16 +21,16 @@ def login(user: _schemas_user.UserLogin, db: Session = Depends(get_db)):
     return _services_user.login(user, db)
 
 
-@router.get("guest")
-def guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["guest"]))]):
-    return "guest"
-
-
 @router.get("admin")
 def admin(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin"]))]):
     return "admin"
 
 
+@router.get("guest")
+def guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin", "guest"]))]):
+    return "guest"
+
+
 @router.get("admin_and_guest")
-def admin_and_guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["guest", "admin"]))]):
+def admin_and_guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin", "guest"]))]):
     return "guest and admin"

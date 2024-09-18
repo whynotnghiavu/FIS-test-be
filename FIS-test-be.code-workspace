@@ -14,11 +14,12 @@
       "path": "contents/code/docker"
     },
     {
-      "name": "python",
-      "path": "contents/code/python"
+      "name": "documents",
+      "path": "contents/documents"
     },
     {
-      "path": "contents/documents"
+      "name": "python",
+      "path": "contents/code/python"
     }
   ],
   "settings": {}
