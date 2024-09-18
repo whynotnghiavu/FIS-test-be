@@ -37,15 +37,21 @@ Kiểm tra ràng buộc khóa?
 
 Nâng cấp sau:
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
+
 chỉ chủ nhân mới sửa được posts, comment
 
-Thêm validate 
+Thêm validate ví dụ: 
 8 password regex k dùng: _ ; * " ' `
-email
+email 
 
-Thêm gửi email
+
+<!-- Thêm gửi email -->
+
 
 sql conect
+
 sql bảng
-utils
-admin
+
+utils check
+
+admin > guest
