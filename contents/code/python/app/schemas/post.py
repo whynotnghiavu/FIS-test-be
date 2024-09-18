@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
+from .comment import Comment
 
 
 
@@ -22,7 +23,7 @@ class PostUpdate(PostBase):
 
 class Post(PostBase):
     id: int
-    # comments: List[Comment] = []
+    comments: List[Comment] = []
 
     class Config:
         # orm_mode = True

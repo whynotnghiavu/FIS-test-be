@@ -4,7 +4,6 @@ from datetime import datetime
 from .database import Base
 
 
-
 class Category(Base):
     __tablename__ = "categories"
 
@@ -24,4 +23,15 @@ class Post(Base):
 
     category = relationship("Category", back_populates="posts")
 
-    # comments = relationship("Comment", back_populates="post")
+    comments = relationship("Comment", back_populates="post", cascade="all, delete-orphan")
+
+
+class Comment(Base):
+    __tablename__ = "comments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(Text)
+    created_at = Column(DateTime(timezone=True), default=datetime.now())
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="SET NULL"), nullable=True)
+
+    post = relationship("Post", back_populates="comments")
