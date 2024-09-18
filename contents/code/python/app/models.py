@@ -1,7 +1,8 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, DateTime, Enum
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from .database import Base
+from enum import Enum as PyEnum
 
 
 class Category(Base):
@@ -35,3 +36,19 @@ class Comment(Base):
     post_id = Column(Integer, ForeignKey("posts.id", ondelete="SET NULL"), nullable=True)
 
     post = relationship("Post", back_populates="comments")
+
+
+class Role(str, PyEnum):
+    admin = "admin"
+    guest = "guest"
+
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, nullable=False, index=True)
+    password = Column(String, nullable=False)
+    role = Column(Enum(Role))
+
+    # posts liên kết sau

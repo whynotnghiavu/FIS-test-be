@@ -9,7 +9,6 @@
 - Xây dựng các bảng 3 bảng có liên kết với nhau tùy tý có sử dụng method get/put/delete/post
 
 - Thêm 1 bảng user
-<!-- ! -->
 - Xác thực bằng jwt trong jwt có xác thực thêm quyền của user
 - Các đầu api được phân quyền theo quyền của user
 
@@ -18,6 +17,7 @@
 - Phân chia các folder, file hợp lý logic
 
 2. Thực hiện chạy trên docker
+<!-- ! -->
 3. Test đầu api trên postman
 4. Chuyển từ http sang https
 
@@ -25,18 +25,17 @@ Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
 Báo cáo 2 ngày 1 lần.
 <!-- ! -->
 
+Hình thức báo cáo
+role là 1 hàng trong bảng
 # Kiểm tra ràng buộc khóa
-
-1 post có nhiều category và 1 category có nhiều post (nâng cấp sau)
-
-<!-- @ 3. Test đầu api trên postman -->
-
+1 post có nhiều category và 1 category có nhiều post (nâng cấp sau
+3. Test đầu api trên postman???
 <!-- fastapi dev a.py -->
 
-Đăng ký
-Đăng nhập
-Quên mật khẩu
 
-CRUD quyền
 
 chỉ chủ nhân mới sửa được posts, comment
+
+
+Thêm gửi email
+Thêm validate 
