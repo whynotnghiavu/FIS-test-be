@@ -8,9 +8,8 @@
 
 - Xây dựng các bảng 3 bảng có liên kết với nhau tùy tý có sử dụng method get/put/delete/post
 
-<!-- ! -->
-
 - Thêm 1 bảng user
+<!-- ! -->
 - Xác thực bằng jwt trong jwt có xác thực thêm quyền của user
 - Các đầu api được phân quyền theo quyền của user
 
@@ -31,14 +30,12 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- @ 3. Test đầu api trên postman -->
 
-
 <!-- fastapi dev a.py -->
-
 
 Đăng ký
 Đăng nhập
 Quên mật khẩu
 
-CRUD quyền 
+CRUD quyền
 
 chỉ chủ nhân mới sửa được posts, comment
