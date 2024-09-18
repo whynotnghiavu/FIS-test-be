@@ -23,19 +23,18 @@
 
 Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
 Báo cáo 2 ngày 1 lần.
+
+<!-- ! -->
+<!-- ! -->
 <!-- ! -->
 
-Hình thức báo cáo
-role là 1 hàng trong bảng
-# Kiểm tra ràng buộc khóa
-1 post có nhiều category và 1 category có nhiều post (nâng cấp sau
-3. Test đầu api trên postman???
+role là 1 hàng trong bảng?
+Kiểm tra ràng buộc khóa?
+
 <!-- fastapi dev a.py -->
-
-
-
+Nâng cấp sau:
+1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 chỉ chủ nhân mới sửa được posts, comment
 
-
+Thêm validate
 Thêm gửi email
-Thêm validate 

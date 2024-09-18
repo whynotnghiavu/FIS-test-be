@@ -1,5 +1,6 @@
+# python-multipart==0.0.9
 uvicorn==0.30.6
 fastapi==0.114.2
 SQLAlchemy==2.0.32
 PyJWT==2.9.0
-# python-multipart==0.0.9
+bcrypt==4.2.0

@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  python:
+    build:
+      context: "../python"
+      dockerfile: "../python/docker/Dockerfile"
+    restart: always
+    volumes:
+      - "../python:/python"
+    ports:
+      - "8000:8000"
+    # environment:
+    #   - DB_HOST=${DB_HOST}
+    #   - DB_PORT=${DB_PORT}
+    #   - SECRET_KEY=${SECRET_KEY} 
