@@ -3,8 +3,6 @@ from typing import List, Optional
 from .post import Post
 
 
-
-
 class CategoryBase(BaseModel):
     name: str
 

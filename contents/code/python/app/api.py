@@ -16,9 +16,6 @@ app.include_router(post.router, prefix="/api/v1/posts", tags=["posts"])
 app.include_router(comment.router, prefix="/api/v1/posts/{post_id}/comments", tags=["comments"])
 
 
-
-
-
 # from fastapi.security import OAuth2PasswordBearer
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 

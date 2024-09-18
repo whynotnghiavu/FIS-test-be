@@ -4,8 +4,6 @@ from typing import List, Optional
 from .comment import Comment
 
 
-
-
 class PostBase(BaseModel):
     title: str
     content: str
@@ -28,5 +26,3 @@ class Post(PostBase):
     class Config:
         # orm_mode = True
         from_attributes = True
-
-
