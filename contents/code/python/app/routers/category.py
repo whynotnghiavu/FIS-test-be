@@ -19,7 +19,7 @@ def get_all_categories(db: Session = Depends(get_db), skip: int = 0, limit: int 
     return _services_category.get_all(db, skip, limit)
 
 
-@router.get("{category_id}", response_model=_schemas_category.Category)
+@router.get("/{category_id}", response_model=_schemas_category.Category)
 def get_one_category_by_id(category_id: int, db: Session = Depends(get_db)):
     category = _services_category.get_by_id(category_id, db)
     if category is None:
@@ -27,7 +27,7 @@ def get_one_category_by_id(category_id: int, db: Session = Depends(get_db)):
     return category
 
 
-@router.put("{category_id}", response_model=_schemas_category.Category)
+@router.put("/{category_id}", response_model=_schemas_category.Category)
 def update_category(category_id: int, category: _schemas_category.CategoryUpdate, db: Session = Depends(get_db)):
     updated_category = _services_category.update(category_id, category, db)
     if updated_category is None:
@@ -35,7 +35,7 @@ def update_category(category_id: int, category: _schemas_category.CategoryUpdate
     return updated_category
 
 
-@router.delete("{category_id}", response_model=_schemas_category.Category)
+@router.delete("/{category_id}", response_model=_schemas_category.Category)
 def delete_category(category_id: int, db: Session = Depends(get_db)):
     deleted_category = _services_category.remove(db, category_id)
     if deleted_category is None:
