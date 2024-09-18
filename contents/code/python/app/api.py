@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from .routers import category
 from .database import create_db
+from .routers import category
+from .routers import post
 
 
 app = FastAPI(
@@ -10,8 +11,10 @@ app = FastAPI(
 
 create_db()
 app.include_router(category.router, prefix="/api/v1/categories", tags=["categories"])
-# post
+app.include_router(post.router, prefix="/api/v1/posts", tags=["posts"])
 # comment
+
+
 
 
 

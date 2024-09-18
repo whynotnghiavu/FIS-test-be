@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-
+from typing import List, Optional
+from .post import Post
 
 
 
@@ -18,7 +19,7 @@ class CategoryUpdate(CategoryBase):
 
 class Category(CategoryBase):
     id: int
-    # posts: List[Post] = []
+    posts: List[Post] = []
 
     class Config:
         # orm_mode = True

@@ -37,7 +37,7 @@ def update_category(category_id: int, category: _schemas_category.CategoryUpdate
 
 @router.delete("/{category_id}", response_model=_schemas_category.Category)
 def delete_category(category_id: int, db: Session = Depends(get_db)):
-    deleted_category = _services_category.remove(db, category_id)
+    deleted_category = _services_category.remove( category_id,db)
     if deleted_category is None:
         raise HTTPException(status_code=404, detail="Category not found")
     return deleted_category

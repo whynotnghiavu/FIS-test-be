@@ -9,7 +9,7 @@ def create(category: _schemas_category.CategoryCreate, db: Session):
     if db_category:
         raise HTTPException(status_code=400, detail=f"Category with name '{category.name}' already exists.")
 
-    new_category = models.Category(name=category.name)
+    new_category = models.Category(**category.model_dump())
     db.add(new_category)
     db.commit()
     db.refresh(new_category)
