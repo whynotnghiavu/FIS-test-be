@@ -27,7 +27,7 @@ class UserBase(BaseModel):
         password_regex = re.compile(r'^(?!.*[_;*\'"`])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$')
         if not password_regex.match(password):
             raise ValueError("Invalid password format")
-        
+
         return password
 
 

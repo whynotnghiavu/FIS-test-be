@@ -20,7 +20,6 @@
 
 <!-- ! -->
 
-3. Test đầu api trên postman
 
 Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
 Báo cáo 2 ngày 1 lần.
@@ -46,8 +45,13 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- Thêm validate: field_validator -->
 
+3. Test đầu api trên postman
 
 <!-- 4. Chuyển từ http sang https -->
+
+Lấy người dùng hiện tại?
+QUYỀN: chỉ chủ nhân mới sửa được posts, comment??? get user
+<!-- posts liên kết user -->
 
 
 <!-- ! -->
@@ -61,11 +65,15 @@ alembic init alembic
 utils check Auto check exits Kiểm tra ràng buộc khóa?
 Auto CRUD?
 
-posts liên kết user
+
+ 
+
+
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
-chỉ chủ nhân mới sửa được posts, comment??? get user
+
+
 
 Thêm gửi email quên mật khẩu, qr, ...
 

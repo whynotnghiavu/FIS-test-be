@@ -8,6 +8,7 @@ class PostBase(BaseModel):
     title: str
     content: str
     created_at: datetime
+    
     category_id: Optional[int]
 
     @field_validator("title")
@@ -35,6 +36,8 @@ class PostUpdate(PostBase):
 class Post(PostBase):
     id: int
     comments: List[Comment] = []
+    
+    user_id: int
 
     class Config:
         # orm_mode = True
