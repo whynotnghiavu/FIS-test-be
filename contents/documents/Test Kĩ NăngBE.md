@@ -21,7 +21,6 @@
 <!-- ! -->
 
 3. Test đầu api trên postman
-4. Chuyển từ http sang https
 
 Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
 Báo cáo 2 ngày 1 lần.
@@ -48,6 +47,7 @@ Báo cáo 2 ngày 1 lần.
 <!-- Thêm validate: field_validator -->
 
 
+<!-- 4. Chuyển từ http sang https -->
 
 
 <!-- ! -->
@@ -65,7 +65,7 @@ posts liên kết user
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
-chỉ chủ nhân mới sửa được posts, comment
+chỉ chủ nhân mới sửa được posts, comment??? get user
 
 Thêm gửi email quên mật khẩu, qr, ...
 
