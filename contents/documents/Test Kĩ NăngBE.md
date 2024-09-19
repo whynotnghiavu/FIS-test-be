@@ -45,16 +45,18 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- Thêm validate: field_validator -->
 
-3. Test đầu api trên postman
 
 <!-- 4. Chuyển từ http sang https -->
 
-Lấy người dùng hiện tại?
+
+Phân quyền:
 QUYỀN: chỉ chủ nhân mới sửa được posts, comment??? get user
+
 <!-- posts liên kết user: Cần kiểm tra lại CRUD -->
 
 
 <!-- ! -->
+3. Test đầu api trên postman
 
 Quản lý SQL:
 v1 v2 Migration:
