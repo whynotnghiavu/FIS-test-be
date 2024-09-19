@@ -2,8 +2,6 @@ import os
 import time
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
 
 MYSQL_HOST = os.getenv("MYSQL_HOST") or "localhost"
@@ -40,20 +38,3 @@ def connect_with_retry():
 
 engine = connect_with_retry()
 
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-Base = declarative_base()
-
-
-def create_db():
-    Base.metadata.create_all(bind=engine)
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()

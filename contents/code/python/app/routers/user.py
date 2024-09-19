@@ -1,7 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
-from ..database import get_db
+
+
+from ..database.get_db import get_db
+
+
 from ..schemas import user as _schemas_user
 from ..services import user as _services_user
 from ..services.role_checker import RoleChecker
@@ -33,5 +37,3 @@ def guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin", "guest"
 @router.get("/admin_and_guest")
 def admin_and_guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin", "guest"]))]):
     return "guest and admin"
-
-

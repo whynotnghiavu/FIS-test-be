@@ -1,7 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from ..database import get_db
+
+
+
+from ..database.get_db import get_db
+
+
+
 from ..schemas import comment as _schemas_comment
 from ..services import comment as _services_comment
 

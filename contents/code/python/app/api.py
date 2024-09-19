@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .database import create_db
+from .database.create_db import create_db
 
 from .middlewares.exception_middleware import ExceptionMiddleware
 
