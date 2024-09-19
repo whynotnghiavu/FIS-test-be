@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from ..models import Role
+from ..models.role import Role
 
 
 class UserBase(BaseModel):

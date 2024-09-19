@@ -62,3 +62,5 @@ Thêm gửi email
 Auto CRUD?
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
+
+# posts liên kết user
