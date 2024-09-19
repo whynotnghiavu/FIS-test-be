@@ -52,7 +52,11 @@ Báo cáo 2 ngày 1 lần.
 Phân quyền:
 QUYỀN: chỉ chủ nhân mới sửa được posts, comment??? get user
 
-<!-- posts liên kết user: Cần kiểm tra lại CRUD -->
+<!-- posts liên kết user: -->
+Cần kiểm tra lại CRUD
+
+<!-- comments liên kết user: -->
+Cần kiểm tra lại CRUD
 
 
 <!-- ! -->

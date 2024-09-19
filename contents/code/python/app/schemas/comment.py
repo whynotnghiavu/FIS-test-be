@@ -26,6 +26,8 @@ class CommentUpdate(CommentBase):
 
 class Comment(CommentBase):
     id: int
+    
+    user_id: int
 
     class Config:
         # orm_mode = True

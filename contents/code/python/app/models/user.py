@@ -16,3 +16,4 @@ class User(Base):
     role = _sqlalchemy.Column(_sqlalchemy.Enum(Role))
 
     posts = relationship("Post", back_populates="user", cascade="all, delete-orphan")
+    comments = relationship("Post", back_populates="user", cascade="all, delete-orphan")
