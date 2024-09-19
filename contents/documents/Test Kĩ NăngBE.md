@@ -45,22 +45,18 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- Truy vấn bị lỗi do server: dùng ExceptionMiddleware -->
 
+<!-- Thêm validate: field_validator -->
 
 
-<!-- Quản lý SQL: -->
-<!-- v1 v2 Migration: -->
-<!-- pip install alembic   -->
-alembic init alembic
+
+
 <!-- ! -->
 
-Thêm validate ví dụ:
-8 password regex k dùng:
+Quản lý SQL:
+v1 v2 Migration:
+pip install alembic  
+alembic init alembic
 
-```
-_ ; * " ' `
-```
-
-<!-- email -->
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
 Auto CRUD?
@@ -71,4 +67,8 @@ posts liên kết user
 
 chỉ chủ nhân mới sửa được posts, comment
 
-Thêm gửi email quên mật khẩu
+Thêm gửi email quên mật khẩu, qr, ...
+
+logging
+
+Thêm gợi ý đầu vào 

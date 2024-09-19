@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from datetime import datetime
 from typing import List, Optional
 from .comment import Comment
@@ -10,6 +10,19 @@ class PostBase(BaseModel):
     created_at: datetime
     category_id: Optional[int]
 
+    @field_validator("title")
+    def title_not_empty(cls, title):
+        if title =="":
+            raise ValueError("title must not be empty")
+
+        return title
+    
+    @field_validator("content")
+    def content_not_empty(cls, content):
+        if content =="":
+            raise ValueError("content must not be empty")
+
+        return content
 
 class PostCreate(PostBase):
     pass
