@@ -51,7 +51,7 @@ Báo cáo 2 ngày 1 lần.
 
 Lấy người dùng hiện tại?
 QUYỀN: chỉ chủ nhân mới sửa được posts, comment??? get user
-<!-- posts liên kết user -->
+<!-- posts liên kết user: Cần kiểm tra lại CRUD -->
 
 
 <!-- ! -->
@@ -75,7 +75,7 @@ Auto CRUD?
 
 
 
-Thêm gửi email quên mật khẩu, qr, ...
+Thêm gửi email quên mật khẩu, qr, ... thêm tokent
 
 logging
 

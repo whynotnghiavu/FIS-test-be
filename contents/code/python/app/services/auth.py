@@ -1,3 +1,4 @@
+import os
 import jwt
 from fastapi.security import HTTPBearer
 from fastapi import Depends, HTTPException
@@ -5,9 +6,9 @@ from datetime import datetime, timedelta
 from pydantic import ValidationError
 from ..schemas import user as _schemas_user
 
-JWT_SECURITY_ALGORITHM = "HS256"
-JWT_SECRET_KEY = "SECRET_KEY"
-# Biến môi trường sau
+JWT_SECURITY_ALGORITHM = os.getenv("JWT_SECURITY_ALGORITHM") or "HS256"
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or "SECRET_KEY"
+JWT_EXPIRE_SECONDS = os.getenv("JWT_EXPIRE_SECONDS") or "259200"
 
 
 reusable_oauth2 = HTTPBearer(
@@ -16,9 +17,7 @@ reusable_oauth2 = HTTPBearer(
 
 
 def generate_token(user: _schemas_user.User):
-    expire = datetime.utcnow() + timedelta(
-        seconds=60 * 60 * 24 * 3  # Expired after 3 days
-    )
+    expire = datetime.now() + timedelta(seconds=JWT_EXPIRE_SECONDS)
 
     to_encode = {
         "exp": expire,
