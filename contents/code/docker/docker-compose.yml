@@ -11,6 +11,23 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_TCP_PORT: ${MYSQL_PORT}
 
+
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      PMA_HOST: ${MYSQL_HOST}
+      PMA_USER: ${MYSQL_USERNAME}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    logging:
+      driver: none
+
+
+
   python:
     build:
       context: "../python"
