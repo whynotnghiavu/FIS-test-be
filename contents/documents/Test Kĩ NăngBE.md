@@ -54,7 +54,10 @@ sql bảng v1 v2 Migration
 chỉ chủ nhân mới sửa được posts, comment
 
 Thêm validate ví dụ:
-8 password regex k dùng: \_ ; \* " ' `
+8 password regex k dùng: 
+```
+_ ; * " ' `
+```
 email
 
 Thêm gửi email
