@@ -49,21 +49,18 @@ sql bảng v1 v2 Migration
 
 <!-- ! -->
 
-1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
-
-chỉ chủ nhân mới sửa được posts, comment
-
 Thêm validate ví dụ:
-8 password regex k dùng: 
+8 password regex k dùng:
+
 ```
 _ ; * " ' `
 ```
-email
 
-Thêm gửi email
-
-Auto CRUD?
+<!-- email -->
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
-
-# posts liên kết user
+Auto CRUD?
+posts liên kết user
+1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
+chỉ chủ nhân mới sửa được posts, comment
+Thêm gửi email
