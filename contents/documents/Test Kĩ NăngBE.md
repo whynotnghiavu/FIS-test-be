@@ -45,8 +45,12 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- Truy vấn bị lỗi do server: dùng ExceptionMiddleware -->
 
-sql bảng v1 v2 Migration
 
+
+<!-- Quản lý SQL: -->
+<!-- v1 v2 Migration: -->
+<!-- pip install alembic   -->
+alembic init alembic
 <!-- ! -->
 
 Thêm validate ví dụ:
@@ -60,7 +64,11 @@ _ ; * " ' `
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
 Auto CRUD?
+
 posts liên kết user
+
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
+
 chỉ chủ nhân mới sửa được posts, comment
-Thêm gửi email
+
+Thêm gửi email quên mật khẩu
