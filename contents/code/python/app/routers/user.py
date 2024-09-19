@@ -36,6 +36,3 @@ def admin_and_guest(_: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin
     return "guest and admin"
 
 
-@router.get("/os")
-def os():
-    return "guest and admin"

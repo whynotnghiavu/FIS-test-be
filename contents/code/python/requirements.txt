@@ -4,3 +4,5 @@ fastapi==0.114.2
 SQLAlchemy==2.0.32
 PyJWT==2.9.0
 bcrypt==4.2.0
+PyMySQL==1.1.1
+cryptography==43.0.1

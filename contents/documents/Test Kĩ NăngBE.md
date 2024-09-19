@@ -30,12 +30,13 @@ Báo cáo 2 ngày 1 lần.
 <!-- @ -->
 <!-- @ -->
 
-role là 1 hàng trong bảng?
-Kiểm tra ràng buộc khóa?
+<!-- role là 1 hàng trong bảng? -->
+
 
 <!-- fastapi dev a.py -->
 
-Nâng cấp sau:
+<!-- !Nâng cấp sau: -->
+
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
 chỉ chủ nhân mới sửa được posts, comment
@@ -45,15 +46,21 @@ Thêm validate ví dụ:
 email 
 
 
-<!-- Thêm gửi email -->
+Thêm gửi email
 
 
-sql conect
+sql conect 
+thời gian chờ thử lại 
+Số lần thử lại 
 
-sql bảng
+sql bảng v1 v2 Migration
 
-utils check
 
-admin > guest
+Auto CRUD?
 
-Sử dụng mysql
+utils check Auto check exits Kiểm tra ràng buộc khóa?
+
+
+<!-- Sử dụng mysql -->
+<!-- Sử dụng phpmyadmin -->
+

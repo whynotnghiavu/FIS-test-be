@@ -9,7 +9,7 @@ class Category(Base):
     __tablename__ = "categories"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, index=True)
+    name = Column(String(255), unique=True, index=True)
     posts = relationship("Post", back_populates="category", cascade="all, delete-orphan")
 
 
@@ -17,7 +17,7 @@ class Post(Base):
     __tablename__ = "posts"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
+    title = Column(String(255), index=True)
     content = Column(Text)
     created_at = Column(DateTime(timezone=True), default=datetime.now())
     category_id = Column(Integer, ForeignKey("categories.id", ondelete="SET NULL"), nullable=True)
@@ -47,8 +47,8 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, nullable=False, index=True)
-    password = Column(String, nullable=False)
+    email = Column(String(255), unique=True, nullable=False, index=True)
+    password = Column(String(255), nullable=False)
     role = Column(Enum(Role))
 
     # posts liên kết sau
