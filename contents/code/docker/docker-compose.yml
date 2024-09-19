@@ -11,9 +11,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_TCP_PORT: ${MYSQL_PORT}
 
-
-
-
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -25,8 +22,6 @@ services:
       PMA_PASSWORD: ${MYSQL_PASSWORD}
     logging:
       driver: none
-
-
 
   python:
     build:
