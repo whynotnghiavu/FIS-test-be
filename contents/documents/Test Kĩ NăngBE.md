@@ -32,35 +32,33 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- role là 1 hàng trong bảng? -->
 
-
 <!-- fastapi dev a.py -->
 
 <!-- !Nâng cấp sau: -->
+
+<!-- Sử dụng mysql -->
+<!-- Sử dụng phpmyadmin -->
+
+<!-- sqlalchemy connect:  -->
+<!-- retry_delay: Thời gian chờ thử lại  -->
+<!-- retries: Số lần thử lại   -->
+
+<!-- Truy vấn bị lỗi do server: dùng ExceptionMiddleware -->
+
+sql bảng v1 v2 Migration
+
+<!-- ! -->
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
 chỉ chủ nhân mới sửa được posts, comment
 
-Thêm validate ví dụ: 
-8 password regex k dùng: _ ; * " ' `
-email 
-
+Thêm validate ví dụ:
+8 password regex k dùng: \_ ; \* " ' `
+email
 
 Thêm gửi email
-
-
-sql conect 
-thời gian chờ thử lại 
-Số lần thử lại 
-
-sql bảng v1 v2 Migration
-
 
 Auto CRUD?
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
-
-
-<!-- Sử dụng mysql -->
-<!-- Sử dụng phpmyadmin -->
-
