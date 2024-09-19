@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
 from ..database import get_db
 from ..schemas import user as _schemas_user
 from ..services import user as _services_user
-from ..services.auth import validate_token
 from ..services.role_checker import RoleChecker
 
 
