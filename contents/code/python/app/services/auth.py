@@ -6,9 +6,15 @@ from datetime import datetime, timedelta
 from pydantic import ValidationError
 from ..schemas import user as _schemas_user
 
-JWT_SECURITY_ALGORITHM = os.getenv("JWT_SECURITY_ALGORITHM") or "HS256"
-JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or "SECRET_KEY"
-JWT_EXPIRE_SECONDS = os.getenv("JWT_EXPIRE_SECONDS") or "259200"
+
+
+
+JWT_SECURITY_ALGORITHM = os.getenv("JWT_SECURITY_ALGORITHM", "HS256")
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "SECRET_KEY")
+JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", 259200))
+
+
+
 
 
 reusable_oauth2 = HTTPBearer(

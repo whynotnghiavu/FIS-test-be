@@ -15,9 +15,9 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
                 status_code=500,
                 content={"detail": "Connection to the database failed"},
             )
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return JSONResponse(
-                status_code=500,
-                content={"detail": "A server error occurred."},
-            )
+        # except Exception as e:
+        #     print(f"An unexpected error occurred: {e}")
+        #     return JSONResponse(
+        #         status_code=500,
+        #         content={"detail": "A server error occurred."},
+        #     )

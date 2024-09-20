@@ -16,13 +16,12 @@ router = APIRouter()
 
 
 @router.post("", response_model=_schemas_post.Post)
-def create_post(post: _schemas_post.PostCreate, db: Session = Depends(get_db)):
-    return _services_post.create(post, db)
-
-# @router.post('/me')
-# def me(user: Annotated[str, Depends(GetUser())]):
-#     return user
-# ??????
+def create_post(
+    post: _schemas_post.PostCreate,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    return _services_post.create(post, email, db)
 
 
 @router.get("", response_model=List[_schemas_post.Post])
@@ -39,15 +38,16 @@ def get_one_post_by_id(post_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{post_id}", response_model=_schemas_post.Post)
-def update_post(post_id: int, post: _schemas_post.PostUpdate, db: Session = Depends(get_db)):
-    updated_post = _services_post.update(post_id, post, db)
+def update_post(
+    post_id: int,
+    post: _schemas_post.PostUpdate,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    updated_post = _services_post.update(post_id, post, email, db)
     if updated_post is None:
         raise HTTPException(status_code=404, detail="Post not found")
     return updated_post
-
-# @router.post('/me')
-# def me(user: Annotated[str, Depends(GetUser())]):
-#     return user
 
 
 @router.delete("/{post_id}", response_model=_schemas_post.Post)
@@ -60,4 +60,3 @@ def delete_post(
     if deleted_post is None:
         raise HTTPException(status_code=404, detail="Post not found")
     return deleted_post
-

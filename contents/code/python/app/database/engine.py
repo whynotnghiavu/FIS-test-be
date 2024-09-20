@@ -4,18 +4,22 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 
 
-MYSQL_HOST = os.getenv("MYSQL_HOST") or "localhost"
+MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
 
-MYSQL_PORT = os.getenv("MYSQL_PORT") or "3306"
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE") or "nghia"
 
-MYSQL_USERNAME = os.getenv("MYSQL_USERNAME") or "root"
-MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD") or ""
+MYSQL_PORT = os.getenv("MYSQL_PORT", "3306")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "nghia")
+
+
+MYSQL_USERNAME = os.getenv("MYSQL_USERNAME", "root")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "")
+
 
 SQLALCHEMY_DATABASE_URL = f'mysql+pymysql://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}'
 
-MYSQL_CONNECT_RETRIES = os.getenv("MYSQL_CONNECT_RETRIES") or 5
-MYSQL_CONNECT_RETRY_DELAY = os.getenv("MYSQL_CONNECT_RETRY_DELAY") or 5
+
+MYSQL_CONNECT_RETRIES = int(os.getenv("MYSQL_CONNECT_RETRIES", 5))
+MYSQL_CONNECT_RETRY_DELAY = int(os.getenv("MYSQL_CONNECT_RETRY_DELAY", 5))
 
 
 def connect_with_retry():
@@ -37,4 +41,3 @@ def connect_with_retry():
 
 
 engine = connect_with_retry()
-

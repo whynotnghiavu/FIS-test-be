@@ -8,4 +8,5 @@ class Category(Base):
 
     id = _sqlalchemy.Column(_sqlalchemy.Integer, primary_key=True, index=True)
     name = _sqlalchemy.Column(_sqlalchemy.String(255), unique=True, index=True)
+    
     posts = relationship("Post", back_populates="category", cascade="all, delete-orphan")

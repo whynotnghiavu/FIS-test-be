@@ -9,12 +9,16 @@ from ..models.comment import Comment as _model_comment
 from ..models.user import User as _model_user
 
 
-def create(post: _schemas_post.PostCreate, db: Session):
+def create(post: _schemas_post.PostCreate, email: str, db: Session):
+    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail=f"Email user not found")
+
     db_category = db.query(_models_category).filter(_models_category.id == post.category_id).first()
     if not db_category:
         raise HTTPException(status_code=400, detail=f"Category not found")
 
-    new_post = _models_post(**post.model_dump())
+    new_post = _models_post(user_id=db_user.id, **post.model_dump())
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -29,7 +33,11 @@ def get_by_id(post_id: int, db: Session):
     return db.query(_models_post).filter(_models_post.id == post_id).first()
 
 
-def update(post_id: int, post: _schemas_post.PostUpdate, db: Session):
+def update(post_id: int, post: _schemas_post.PostUpdate, email: str, db: Session):
+    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail=f"Email user not found")
+
     if post.category_id != None:
         db_category = db.query(_models_category).filter(_models_category.id == post.category_id).first()
         if not db_category:
@@ -38,6 +46,9 @@ def update(post_id: int, post: _schemas_post.PostUpdate, db: Session):
     db_post = db.query(_models_post).filter(_models_post.id == post_id).first()
     if db_post is None:
         return None
+
+    if db_user.id != db_post.user_id:
+        raise HTTPException(status_code=400, detail=f"User is not the owner of the post")
 
     for key, value in post.model_dump(exclude_unset=True).items():
         setattr(db_post, key, value)
@@ -49,14 +60,14 @@ def update(post_id: int, post: _schemas_post.PostUpdate, db: Session):
 def remove(post_id: int, email: str, db: Session):
     db_user = db.query(_model_user).filter(_model_user.email == email).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail=f"Email không tồn tại")
+        raise HTTPException(status_code=400, detail=f"Email user not found")
 
     db_post = db.query(_models_post).filter(_models_post.id == post_id).first()
     if db_post is None:
         return None
 
     if db_user.id != db_post.user_id:
-        raise HTTPException(status_code=400, detail=f"Người dùng không phải chủ của bài đăng")
+        raise HTTPException(status_code=400, detail=f"User is not the owner of the post")
 
     db.delete(db_post)
     db.commit()

@@ -7,7 +7,7 @@ if __name__ == "__main__":
         port=8080,
         reload=True,
 
+        # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
         ssl_keyfile="./ssl/key.pem",
         ssl_certfile="./ssl/cert.pem",
     )
-# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem

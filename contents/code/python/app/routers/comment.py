@@ -16,13 +16,14 @@ router = APIRouter()
 
 
 @router.post("", response_model=_schemas_comment.Comment)
-def create_comment(post_id: int, comment: _schemas_comment.CommentCreate, db: Session = Depends(get_db)):
-    return _services_comment.create(post_id, comment, db)
+def create_comment(
+    post_id: int,
+    comment: _schemas_comment.CommentCreate,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    return _services_comment.create(post_id, comment,email, db)
 
-
-# @router.post('/me')
-# def me(user: Annotated[str, Depends(GetUser())]):
-#     return user
 
 @router.get("", response_model=List[_schemas_comment.Comment])
 def get_all_comments(post_id: int, db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
@@ -38,16 +39,17 @@ def get_one_comment_by_id(comment_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{comment_id}", response_model=_schemas_comment.Comment)
-def update_comment(comment_id: int, comment: _schemas_comment.CommentUpdate, db: Session = Depends(get_db)):
-    updated_comment = _services_comment.update(comment_id, comment, db)
+def update_comment(
+    comment_id: int,
+    comment: _schemas_comment.CommentUpdate,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    updated_comment = _services_comment.update(comment_id, comment,email, db)
     if updated_comment is None:
         raise HTTPException(status_code=404, detail="Comment not found")
     return updated_comment
 
-
-# @router.post('/me')
-# def me(user: Annotated[str, Depends(GetUser())]):
-#     return user
 
 @router.delete("/{comment_id}", response_model=_schemas_comment.Comment)
 def delete_comment(
