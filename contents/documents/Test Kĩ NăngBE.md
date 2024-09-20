@@ -18,11 +18,6 @@
 
 2. Thực hiện chạy trên docker
 
-<!-- ! -->
-
-Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
-Báo cáo 2 ngày 1 lần.
-
 <!-- @ -->
 <!-- @ -->
 <!-- @ -->
@@ -31,7 +26,7 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- fastapi dev a.py -->
 
-<!-- !Đã làm: -->
+<!-- !Đã làm thêm: -->
 
 Sử dụng mysql
 Sử dụng phpmyadmin
@@ -55,27 +50,43 @@ Thêm sửa xóa (posts, comment) chỉ chủ nhân
 
 Xóa thì chỉ return `204 No Content`
 
-<!-- !Nâng cấp sau: -->
-
-<!--
-Quản lý SQL:
-v1 v2 Migration:
-thêm cột mô tả
-alembic
+Quản lý SQL .v1 .v2 Migration: thêm cột mô tả
+Dùng alembic
 pip install alembic
 alembic init alembic
--->
 
-<!-- 3. Test đầu api trên postman -->
+alembic revision -m "Add a column description"
 
-utils check Auto check exits Kiểm tra ràng buộc khóa?
+alembic upgrade +1 
+alembic downgrade -1
 
-Auto CRUD?
+
+
+
+<!-- !Nâng cấp sau: -->
+
+`Test đầu api trên postman`
+
+utils check Auto check exits Kiểm tra ràng buộc khóa
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
 Thêm gửi email quên mật khẩu, qr, ... tokent
 
-logging
+Thêm logging
 
-Thêm gợi ý đầu vào
+Thêm gợi ý DTO
+
+<!-- !Câu hỏi: -->
+
+
+Auto CRUD?
+
+<!-- !Kiến thức cần học: -->
+
+Fastapi
+Sqlaichemy
+Jwt
+Alembic
+Docker
+Postman
