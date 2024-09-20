@@ -3,10 +3,9 @@ from sqlalchemy.orm import Session
 from ..schemas import comment as _schemas_comment
 
 
-
 from ..models.post import Post as _models_post
 from ..models.comment import Comment as _model_comment
-
+from ..models.user import User as _model_user
 
 
 def create(post_id: int, comment: _schemas_comment.CommentCreate, db: Session):
@@ -50,10 +49,17 @@ def update(comment_id: int, comment: _schemas_comment.CommentUpdate, db: Session
     return db_comment
 
 
-def remove(comment_id: int, db: Session):
+def remove(comment_id: int, email: str, db: Session):
+    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail=f"Email không tồn tại")
+
     db_comment = db.query(_model_comment).filter(_model_comment.id == comment_id).first()
     if db_comment is None:
         return None
+
+    if db_user.id != db_comment.user_id:
+        raise HTTPException(status_code=400, detail=f"Người dùng không phải chủ của bình luận")
 
     db.delete(db_comment)
     db.commit()

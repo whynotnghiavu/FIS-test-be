@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-
+from typing import Annotated
 
 
 from ..database.get_db import get_db
 
 
-
 from ..schemas import post as _schemas_post
 from ..services import post as _services_post
+from ..services.get_email_user import GetEmailUser
 
 
 router = APIRouter()
@@ -18,6 +18,11 @@ router = APIRouter()
 @router.post("", response_model=_schemas_post.Post)
 def create_post(post: _schemas_post.PostCreate, db: Session = Depends(get_db)):
     return _services_post.create(post, db)
+
+# @router.post('/me')
+# def me(user: Annotated[str, Depends(GetUser())]):
+#     return user
+# ??????
 
 
 @router.get("", response_model=List[_schemas_post.Post])
@@ -40,10 +45,19 @@ def update_post(post_id: int, post: _schemas_post.PostUpdate, db: Session = Depe
         raise HTTPException(status_code=404, detail="Post not found")
     return updated_post
 
+# @router.post('/me')
+# def me(user: Annotated[str, Depends(GetUser())]):
+#     return user
+
 
 @router.delete("/{post_id}", response_model=_schemas_post.Post)
-def delete_post(post_id: int, db: Session = Depends(get_db)):
-    deleted_post = _services_post.remove(post_id, db)
+def delete_post(
+    post_id: int,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    deleted_post = _services_post.remove(post_id, email, db)
     if deleted_post is None:
         raise HTTPException(status_code=404, detail="Post not found")
     return deleted_post
+

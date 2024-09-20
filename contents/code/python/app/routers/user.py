@@ -13,7 +13,7 @@ from ..services import user as _services_user
 from ..services.auth import validate_token
 
 from ..services.role_checker import RoleChecker
-from ..services.get_user import GetUser
+from ..services.get_email_user import GetEmailUser
 
 router = APIRouter()
 
@@ -26,8 +26,3 @@ def register(user: _schemas_user.UserRegister, db: Session = Depends(get_db)):
 @router.post('/login')
 def login(user: _schemas_user.UserLogin, db: Session = Depends(get_db)):
     return _services_user.login(user, db)
-
-
-# @router.post('/me')
-# def me(user: Annotated[str, Depends(GetUser())]):
-#     return user

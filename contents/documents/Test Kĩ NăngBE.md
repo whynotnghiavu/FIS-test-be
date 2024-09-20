@@ -20,7 +20,6 @@
 
 <!-- ! -->
 
-
 Yêu cầu làm trong 1 tuần kể từ nhận đề bài.
 Báo cáo 2 ngày 1 lần.
 
@@ -32,57 +31,54 @@ Báo cáo 2 ngày 1 lần.
 
 <!-- fastapi dev a.py -->
 
+<!-- !Đã làm: -->
+
+Sử dụng mysql
+Sử dụng phpmyadmin
+
+sqlalchemy connect:
+retry_delay: Thời gian chờ thử lại
+retries: Số lần thử lại
+
+Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
+
+Thêm validate: field_validator
+
+4. Chuyển từ http sang https
+
 <!-- !Nâng cấp sau: -->
 
-<!-- Sử dụng mysql -->
-<!-- Sử dụng phpmyadmin -->
-
-<!-- sqlalchemy connect:  -->
-<!-- retry_delay: Thời gian chờ thử lại  -->
-<!-- retries: Số lần thử lại   -->
-
-<!-- Truy vấn bị lỗi do server: dùng ExceptionMiddleware -->
-
-<!-- Thêm validate: field_validator -->
-
-
-<!-- 4. Chuyển từ http sang https -->
-
-
-Phân quyền:
-QUYỀN: chỉ chủ nhân mới sửa được posts, comment??? get user
+Phân quyền: Admin all, Thêm sửa xóa (posts, comment) chỉ chủ nhân
 
 <!-- posts liên kết user: -->
+
 Cần kiểm tra lại CRUD
 
 <!-- comments liên kết user: -->
+
 Cần kiểm tra lại CRUD
 
+đang bị lỗi crud
 
 <!-- ! -->
-3. Test đầu api trên postman
 
+<!-- 3. Test đầu api trên postman -->
+
+<!--
 Quản lý SQL:
 v1 v2 Migration:
-pip install alembic  
-alembic init alembic
-
+alembic
+pip install alembic
+alembic init alembic -->
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
+
 Auto CRUD?
-
-
- 
-
-
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
-
-
-
-Thêm gửi email quên mật khẩu, qr, ... thêm tokent
+Thêm gửi email quên mật khẩu, qr, ... tokent
 
 logging
 
-Thêm gợi ý đầu vào 
+Thêm gợi ý đầu vào

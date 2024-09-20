@@ -4,7 +4,7 @@ from ..schemas.user import JWTUser
 from .auth import validate_token
 
 
-class GetUser:
+class GetEmailUser:
     def __init__(self):
         pass
 

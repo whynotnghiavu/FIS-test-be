@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-
+from typing import Annotated
 
 
 from ..database.get_db import get_db
 
 
-
 from ..schemas import comment as _schemas_comment
 from ..services import comment as _services_comment
+from ..services.get_email_user import GetEmailUser
 
 
 router = APIRouter()
@@ -19,6 +19,10 @@ router = APIRouter()
 def create_comment(post_id: int, comment: _schemas_comment.CommentCreate, db: Session = Depends(get_db)):
     return _services_comment.create(post_id, comment, db)
 
+
+# @router.post('/me')
+# def me(user: Annotated[str, Depends(GetUser())]):
+#     return user
 
 @router.get("", response_model=List[_schemas_comment.Comment])
 def get_all_comments(post_id: int, db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
@@ -41,9 +45,17 @@ def update_comment(comment_id: int, comment: _schemas_comment.CommentUpdate, db:
     return updated_comment
 
 
+# @router.post('/me')
+# def me(user: Annotated[str, Depends(GetUser())]):
+#     return user
+
 @router.delete("/{comment_id}", response_model=_schemas_comment.Comment)
-def delete_comment(comment_id: int, db: Session = Depends(get_db)):
-    deleted_comment = _services_comment.remove(comment_id, db)
+def delete_comment(
+    comment_id: int,
+    email: Annotated[str, Depends(GetEmailUser())],
+    db: Session = Depends(get_db)
+):
+    deleted_comment = _services_comment.remove(comment_id, email, db)
     if deleted_comment is None:
         raise HTTPException(status_code=404, detail="Comment not found")
     return deleted_comment
