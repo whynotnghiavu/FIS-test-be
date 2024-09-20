@@ -11,7 +11,7 @@ from ..services.role_checker import RoleChecker
 from typing import Annotated
 
 
-router = APIRouter()
+router = APIRouter(prefix="/categories")
 
 
 @router.post("", response_model=_schemas_category.Category)
@@ -55,7 +55,4 @@ def delete_category(
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=["admin"]))],
     db: Session = Depends(get_db)
 ):
-    deleted_category = _services_category.remove(category_id, db)
-    if deleted_category is None:
-        raise HTTPException(status_code=404, detail="Category not found")
-    return
+    return _services_category.remove(category_id, db)

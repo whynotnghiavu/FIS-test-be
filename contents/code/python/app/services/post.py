@@ -71,4 +71,4 @@ def remove(post_id: int, email: str, db: Session):
 
     db.delete(db_post)
     db.commit()
-    return db_post
+    return  

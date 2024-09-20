@@ -12,7 +12,7 @@ from ..services import post as _services_post
 from ..services.get_email_user import GetEmailUser
 
 
-router = APIRouter()
+router = APIRouter(prefix="/posts")
 
 
 @router.post("", response_model=_schemas_post.Post)

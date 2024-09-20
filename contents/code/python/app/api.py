@@ -20,11 +20,12 @@ create_db()
 
 app.add_middleware(ExceptionMiddleware)
 
+api_version = "/api/v1"
 
-app.include_router(user.router, prefix="/api/v1/user", tags=["users"])
-app.include_router(category.router, prefix="/api/v1/categories", tags=["categories"])
-app.include_router(post.router, prefix="/api/v1/posts", tags=["posts"])
-app.include_router(comment.router, prefix="/api/v1/posts/{post_id}/comments", tags=["comments"])
+app.include_router(user.router, prefix=f"{api_version}", tags=["users"])
+app.include_router(category.router, prefix=f"{api_version}", tags=["categories"])
+app.include_router(post.router, prefix=f"{api_version}", tags=["posts"])
+app.include_router(comment.router, prefix=f"{api_version}", tags=["comments"])
 
 
 @app.get("/")

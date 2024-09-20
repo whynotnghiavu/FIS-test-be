@@ -63,15 +63,14 @@ def update(comment_id: int, comment: _schemas_comment.CommentUpdate, email: str,
 def remove(comment_id: int, email: str, db: Session):
     db_user = db.query(_model_user).filter(_model_user.email == email).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail=f"Email user not found")
+        raise HTTPException(status_code=404, detail=f"Email user not found")
 
     db_comment = db.query(_model_comment).filter(_model_comment.id == comment_id).first()
     if db_comment is None:
-        return None
+        raise HTTPException(status_code=404, detail="Comment not found")
 
     if db_user.id != db_comment.user_id:
-        raise HTTPException(status_code=400, detail=f"User is not the owner of the comment")
+        raise HTTPException(status_code=403, detail=f"User is not the owner of the comment")
 
     db.delete(db_comment)
     db.commit()
-    return db_comment

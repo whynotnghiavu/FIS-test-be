@@ -64,6 +64,16 @@ alembic downgrade -1
 
 `Test đầu api trên postman`
 
+
+
+<!-- /posts"  -->
+<!-- /posts/{post_id}"  -->
+
+<!-- /posts/{post_id}/comments"  -->
+<!-- /posts/{post_id}/comments/{comment_id}"  -->
+
+<!-- ! -->
+
 utils check Auto check exits Kiểm tra ràng buộc khóa
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
@@ -72,17 +82,46 @@ Thêm gửi email quên mật khẩu, qr, ... tokent
 
 Thêm logging
 
+Cách loại bỏ thông tin DTO
+
 Thêm gợi ý DTO
 
 <!-- !Câu hỏi: -->
 
-Auto CRUD?
+<!-- Auto CRUD? -->
 
 <!-- !Kiến thức cần học: -->
 
 Fastapi
-Sqlaichemy
-Jwt
-Alembic
+Sqlaichemy: ORM
+Jwt và auth
+Alembic: control DB
 Docker
-Postman
+Postman và các tạo test
+
+
+<!-- ! -->
+
+pm.test("Check Not authenticated or ownership message", function () {
+    var jsonData = pm.response.json();
+    if (pm.response.code === 403) {
+        pm.expect(jsonData.detail).to.be.oneOf([
+            "Not authenticated", 
+            "User is not the owner of the comment"
+        ]);
+    }
+});
+
+pm.test("Check Comment not found or Email not found message", function () {
+    if (pm.response.code === 404) {
+        var jsonData = pm.response.json();
+        pm.expect(jsonData.detail).to.be.oneOf([
+            "Comment not found", 
+            "Email user not found"
+        ]);
+    }
+});
+
+pm.test("Check delete success", function () {
+    pm.expect(pm.response.code).to.eql(204);
+});

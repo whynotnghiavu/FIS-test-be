@@ -6,7 +6,6 @@ from ..models.role import Role
 class UserBase(BaseModel):
     email: str
     password: str
-    role: Role
 
     @field_validator("email")
     def email_validator(cls, email):
@@ -32,12 +31,11 @@ class UserBase(BaseModel):
 
 
 class UserLogin(UserBase):
-    email: str
-    password: str
+    pass
 
 
 class UserRegister(UserBase):
-    pass
+    role: Role
 
 
 class JWTUser(UserBase):
@@ -47,6 +45,7 @@ class JWTUser(UserBase):
 
 class User(UserBase):
     id: int
+    role: Role
 
     class Config:
         # orm_mode = True

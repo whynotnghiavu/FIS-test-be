@@ -12,7 +12,7 @@ from ..services import comment as _services_comment
 from ..services.get_email_user import GetEmailUser
 
 
-router = APIRouter()
+router = APIRouter(prefix="/posts/{post_id}/comments")
 
 
 @router.post("", response_model=_schemas_comment.Comment)
@@ -57,7 +57,6 @@ def delete_comment(
     email: Annotated[str, Depends(GetEmailUser())],
     db: Session = Depends(get_db)
 ):
-    deleted_comment = _services_comment.remove(comment_id, email, db)
-    if deleted_comment is None:
-        raise HTTPException(status_code=404, detail="Comment not found")
-    return  
+    
+    return _services_comment.remove(comment_id, email, db)
+

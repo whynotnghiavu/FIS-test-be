@@ -5,8 +5,6 @@ from datetime import datetime
 
 class CommentBase(BaseModel):
     text: str
-    created_at: datetime
-    post_id: Optional[int]
 
     @field_validator("text")
     def text_not_empty(cls, text):
@@ -26,7 +24,9 @@ class CommentUpdate(CommentBase):
 
 class Comment(CommentBase):
     id: int
+    created_at: datetime
     
+    post_id: Optional[int]
     user_id: int
 
     class Config:

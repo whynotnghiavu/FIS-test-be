@@ -6,7 +6,6 @@ from ..schemas import category as _schemas_category
 from ..models.category import Category as _models_category
 
 
-
 def create(category: _schemas_category.CategoryCreate, db: Session):
     db_category = db.query(_models_category).filter(_models_category.name == category.name).first()
     if db_category:
@@ -50,9 +49,8 @@ def update(category_id: int, category: _schemas_category.CategoryUpdate, db: Ses
 
 def remove(category_id: int, db: Session):
     db_category = db.query(_models_category).filter(_models_category.id == category_id).first()
-    if db_category is None:
-        return None
-
-    db.delete(db_category)
-    db.commit()
-    return db_category
+    if db_category:
+        db.delete(db_category)
+        db.commit()
+        return
+    raise HTTPException(status_code=404, detail="Category not found")

@@ -15,7 +15,7 @@ from ..services.auth import validate_token
 from ..services.role_checker import RoleChecker
 from ..services.get_email_user import GetEmailUser
 
-router = APIRouter()
+router = APIRouter(prefix="/user")
 
 
 @router.post('/register')
