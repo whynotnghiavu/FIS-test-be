@@ -36,6 +36,7 @@ retry_delay: Thời gian chờ thử lại
 retries: Số lần thử lại
 
 Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
+<!-- @Nhưng tất cả lỗi DB đều bị return -->
 
 Thêm validate: field_validator
 
@@ -60,9 +61,10 @@ alembic revision -m "Add a column description"
 alembic upgrade +1
 alembic downgrade -1
 
-<!-- !Nâng cấp sau: -->
 
 `Test đầu api trên postman`
+
+<!-- !Nâng cấp sau: -->
 
 
 
