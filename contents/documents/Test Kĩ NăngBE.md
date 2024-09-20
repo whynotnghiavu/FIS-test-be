@@ -46,30 +46,27 @@ Thêm validate: field_validator
 
 4. Chuyển từ http sang https
 
+posts liên kết user:
+comments liên kết user:
+
+Phân quyền:
+Admin all
+Thêm sửa xóa (posts, comment) chỉ chủ nhân
+
+Xóa thì chỉ return
+
 <!-- !Nâng cấp sau: -->
-
-Phân quyền: Admin all, Thêm sửa xóa (posts, comment) chỉ chủ nhân
-
-<!-- posts liên kết user: -->
-
-Cần kiểm tra lại CRUD
-
-<!-- comments liên kết user: -->
-
-Cần kiểm tra lại CRUD
-
-đang bị lỗi crud
-
-<!-- ! -->
-
-<!-- 3. Test đầu api trên postman -->
 
 <!--
 Quản lý SQL:
 v1 v2 Migration:
+thêm cột mô tả
 alembic
 pip install alembic
-alembic init alembic -->
+alembic init alembic
+-->
+
+<!-- 3. Test đầu api trên postman -->
 
 utils check Auto check exits Kiểm tra ràng buộc khóa?
 
