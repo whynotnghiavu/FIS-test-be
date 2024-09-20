@@ -51,7 +51,7 @@ def update_comment(
     return updated_comment
 
 
-@router.delete("/{comment_id}", response_model=_schemas_comment.Comment)
+@router.delete("/{comment_id}", status_code=204)
 def delete_comment(
     comment_id: int,
     email: Annotated[str, Depends(GetEmailUser())],
@@ -60,4 +60,4 @@ def delete_comment(
     deleted_comment = _services_comment.remove(comment_id, email, db)
     if deleted_comment is None:
         raise HTTPException(status_code=404, detail="Comment not found")
-    return deleted_comment
+    return  

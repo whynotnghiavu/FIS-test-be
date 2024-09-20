@@ -53,7 +53,7 @@ Phân quyền:
 Admin all
 Thêm sửa xóa (posts, comment) chỉ chủ nhân
 
-Xóa thì chỉ return
+Xóa thì chỉ return `204 No Content`
 
 <!-- !Nâng cấp sau: -->
 

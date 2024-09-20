@@ -50,7 +50,7 @@ def update_post(
     return updated_post
 
 
-@router.delete("/{post_id}", response_model=_schemas_post.Post)
+@router.delete("/{post_id}", status_code=204)
 def delete_post(
     post_id: int,
     email: Annotated[str, Depends(GetEmailUser())],
@@ -59,4 +59,4 @@ def delete_post(
     deleted_post = _services_post.remove(post_id, email, db)
     if deleted_post is None:
         raise HTTPException(status_code=404, detail="Post not found")
-    return deleted_post
+    return  
