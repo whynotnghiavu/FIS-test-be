@@ -51,17 +51,14 @@ Thêm sửa xóa (posts, comment) chỉ chủ nhân
 Xóa thì chỉ return `204 No Content`
 
 Quản lý SQL .v1 .v2 Migration: thêm cột mô tả
-Dùng alembic
+Dùng `alembic`
 pip install alembic
 alembic init alembic
 
 alembic revision -m "Add a column description"
 
-alembic upgrade +1 
+alembic upgrade +1
 alembic downgrade -1
-
-
-
 
 <!-- !Nâng cấp sau: -->
 
@@ -78,7 +75,6 @@ Thêm logging
 Thêm gợi ý DTO
 
 <!-- !Câu hỏi: -->
-
 
 Auto CRUD?
 
