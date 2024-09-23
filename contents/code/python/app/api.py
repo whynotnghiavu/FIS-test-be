@@ -1,9 +1,14 @@
 from fastapi import FastAPI
 
+from .database.create_db import create_db
+from .database.seeders.create_superuser import create_superuser
 
-app = FastAPI(
-    title='Test Kĩ Năng Backend',
-)
+
+create_db()
+create_superuser()
+
+
+app = FastAPI()
 
 
 @app.get("/")

@@ -25,7 +25,7 @@ def connect_with_retry():
         try:
             engine = create_engine(
                 SQLALCHEMY_DATABASE_URL,
-                echo=True, # Log SQL queries
+                # echo=True, # Hiển thị log SQL
                 pool_pre_ping=True  # Thực hiện ping
             )
             engine.connect()

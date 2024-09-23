@@ -69,18 +69,24 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 
 <!-- !SSL -->
 
-Quản lý SQL .v1 .v2 Migration: Dùng `alembic`
+<!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
 
-pip install alembic
 alembic init alembic
 
 alembic upgrade head
 alembic upgrade +1
 alembic downgrade -1
 
-
 alembic revision --autogenerate -m "first init"
+
+<!-- !alembic -->
+
 <!-- # -->
+
+Thêm admin đầu tiên, đăng ký là admin
+Có admin đầu tiên và login ở đăng ký mới
+.env User_name default: admin password default: admin
+IF count =0 thì tạo user admin, password admin
 
 <!-- ! -->
 
@@ -89,11 +95,6 @@ Làm lại sau
 postman: test
 
 <!-- ! Học Postman -->
-
-Thêm admin đầu tiên, đăng ký là admin
-Có admin đầu tiên và login ở đăng ký mới
-.env User_name default: admin password default: admin
-IF count =0 thì tạo user admin, password admin
 
 <!-- -->
 
