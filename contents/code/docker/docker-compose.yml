@@ -10,12 +10,9 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_TCP_PORT: ${MYSQL_PORT}
- 
 
   python:
-    build:
-      context: "../python"
-      dockerfile: "../python/docker/Dockerfile"
+    build: ../python
     restart: always
     volumes:
       - "../python:/python"
