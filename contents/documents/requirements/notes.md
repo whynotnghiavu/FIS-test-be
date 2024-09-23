@@ -80,8 +80,6 @@ alembic downgrade -1
 
 
 alembic revision --autogenerate -m "first init"
-alembic revision --autogenerate -m "Add a column description"
-
 <!-- # -->
 
 <!-- ! -->
