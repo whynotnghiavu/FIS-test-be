@@ -14,9 +14,9 @@ create_db()
 create_superuser()
 
 
-app = FastAPI()
-
-
+app = FastAPI(
+    title='Test Kĩ Năng Backend'
+)
 
 
 app.include_router(user.router, prefix=f"/api/v1", tags=["users"])

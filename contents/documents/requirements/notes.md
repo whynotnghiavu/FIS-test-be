@@ -93,17 +93,19 @@ Phân quyền chỉ admin mới đăng ký tk mới
 <!-- @ Có dùng trực tiếp trong app/api  -->
 <!-- https://gist.github.com/jsmsalt/26bf25844870d59eee17997727e3a631 -->
 
-<!-- # -->
+<!-- ################### -->
 
-<!-- -->
+Xử lý OTP: Dùng  thư viện pyotp
+https://it-tools.tech/otp-generator
 
-login đúng : otp qr
-k có jwt ,
+is2Fa = False; Enable
 
-<!-- -->
+<!-- !pyotp -->
+<!-- https://pyauth.github.io/pyotp -->
+<!-- !Học thuật toán HOTP, TOTP -->
+<!-- https://www.onelogin.com/learn/otp-totp-hotp -->
 
-user: email, password, role, xác nhận is2Fa = False; Enable
-tokent: user_id,
+<!-- https://pinonote.wordpress.com/2018/11/27/thuat-toan-hmac-based-one-time-password-algorithm-hotp-va-time-based-one-time-password-totp-trong-google-authenticator/ -->
 
 <!-- -->
 <!-- ! -->
@@ -118,7 +120,7 @@ Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at
 
 <!-- -->
 
-thêm sub id trong jwt để truy vấn user id trong post comment
+thêm sub id trong jwt để truy vấn user id trong post comment `tokent: user_id,`
 
 Thử hết hạn jwt?
 
