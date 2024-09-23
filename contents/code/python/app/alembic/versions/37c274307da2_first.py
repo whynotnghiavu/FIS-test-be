@@ -1,4 +1,4 @@
-"""first
+"""first init
 
 Revision ID: 37c274307da2
 Revises: 
