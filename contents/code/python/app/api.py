@@ -1,14 +1,9 @@
 from fastapi import FastAPI
 
 
-
-
-
 app = FastAPI(
     title='Test Kĩ Năng Backend',
 )
-
- 
 
 
 @app.get("/")
