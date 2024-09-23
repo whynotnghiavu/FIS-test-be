@@ -1,0 +1,33 @@
+version: "3.4"
+
+services:
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_TCP_PORT: ${MYSQL_PORT}
+ 
+
+  python:
+    build:
+      context: "../python"
+      dockerfile: "../python/docker/Dockerfile"
+    restart: always
+    volumes:
+      - "../python:/python"
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
