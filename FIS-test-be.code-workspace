@@ -2,10 +2,16 @@
   "extensions": { "recommendations": [] },
   "folders": [
     {
+      "name": "FIS-test-be",
       "path": "."
     },
     {
-      "path": "contents"
+      "name": "docker",
+      "path": "contents/code/docker"
+    },
+    {
+      "name": "python",
+      "path": "contents/code/python"
     }
   ],
   "settings": {}
