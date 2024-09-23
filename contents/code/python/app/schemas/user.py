@@ -1,6 +1,11 @@
 import re
 from pydantic import BaseModel, field_validator
-from ..models.role import Role
+ 
+
+
+from ..models import Role
+
+
 
 
 class UserBase(BaseModel):
@@ -29,18 +34,14 @@ class UserBase(BaseModel):
 
         return password
 
+class UserRegister(UserBase):
+    role: Role
 
 class UserLogin(UserBase):
     pass
 
 
-class UserRegister(UserBase):
-    role: Role
 
-
-class JWTUser(UserBase):
-    email: str
-    role: Role
 
 
 class User(UserBase):
@@ -50,3 +51,6 @@ class User(UserBase):
     class Config:
         # orm_mode = True
         from_attributes = True
+
+class JWTUser(User):
+    pass

@@ -35,7 +35,7 @@ class Post(Base):
     category = relationship("Category", back_populates="posts")
     comments = relationship("Comment", back_populates="post", cascade="all, delete-orphan")
 
-    
+
 class Comment(Base):
     __tablename__ = "comments"
 
@@ -50,11 +50,9 @@ class Comment(Base):
     post = relationship("Post", back_populates="comments")
 
 
-
-
 class Role(str, Enum):
-    admin = "admin"
-    user = "user"
+    ADMIN = "admin"
+    USER = "user"
 
 
 class User(Base):

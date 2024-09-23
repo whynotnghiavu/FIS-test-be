@@ -1,6 +1,15 @@
-def create_superuser():
-    print("superuser")
-    # print("🐍 File: seeders/create_superuser.py | Line: 3 | create_superuser ~ ","superuser")
-    # with open('./app/modelsaaa.py', 'w') as models_file:
-    #     models_file.write("")
+import os
+from ..get_db import get_db
+from ...services import user as _services_user
+from ...schemas import user as _schemas_user
+from ...models import Role
 
+
+def create_superuser():
+    user = _schemas_user.UserRegister(
+        email=os.getenv("EMAIL_ADMIN_DEFAULT", "admin@gmail.com"),
+        password=os.getenv("PASSWORD_ADMIN_DEFAULT", "admin@A8"),
+        role=Role.ADMIN
+    )
+
+    return _services_user.create_superuser(user, next(get_db()))

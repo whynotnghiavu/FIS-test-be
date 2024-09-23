@@ -2,23 +2,20 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from ..schemas import post as _schemas_post
 
-
-from ..models.category import Category as _models_category
-from ..models.post import Post as _models_post
-from ..models.comment import Comment as _model_comment
-from ..models.user import User as _model_user
+from .. import models
+ 
 
 
 def create(post: _schemas_post.PostCreate, email: str, db: Session):
-    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    db_user = db.query(models.User).filter(models.User.email == email).first()
     if not db_user:
         raise HTTPException(status_code=400, detail=f"Email user not found")
 
-    db_category = db.query(_models_category).filter(_models_category.id == post.category_id).first()
+    db_category = db.query(models.Category).filter(models.Category.id == post.category_id).first()
     if not db_category:
         raise HTTPException(status_code=400, detail=f"Category not found")
 
-    new_post = _models_post(user_id=db_user.id, **post.model_dump())
+    new_post = models.Post(user_id=db_user.id, **post.model_dump())
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -26,24 +23,24 @@ def create(post: _schemas_post.PostCreate, email: str, db: Session):
 
 
 def get_all(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(_models_post).offset(skip).limit(limit).all()
+    return db.query(models.Post).offset(skip).limit(limit).all()
 
 
 def get_by_id(post_id: int, db: Session):
-    return db.query(_models_post).filter(_models_post.id == post_id).first()
+    return db.query(models.Post).filter(models.Post.id == post_id).first()
 
 
 def update(post_id: int, post: _schemas_post.PostUpdate, email: str, db: Session):
-    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    db_user = db.query(models.User).filter(models.User.email == email).first()
     if not db_user:
         raise HTTPException(status_code=400, detail=f"Email user not found")
 
     if post.category_id != None:
-        db_category = db.query(_models_category).filter(_models_category.id == post.category_id).first()
+        db_category = db.query(models.Category).filter(models.Category.id == post.category_id).first()
         if not db_category:
             raise HTTPException(status_code=400, detail=f"Category not found")
 
-    db_post = db.query(_models_post).filter(_models_post.id == post_id).first()
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if db_post is None:
         return None
 
@@ -58,11 +55,11 @@ def update(post_id: int, post: _schemas_post.PostUpdate, email: str, db: Session
 
 
 def remove(post_id: int, email: str, db: Session):
-    db_user = db.query(_model_user).filter(_model_user.email == email).first()
+    db_user = db.query(models.User).filter(models.User.email == email).first()
     if not db_user:
         raise HTTPException(status_code=400, detail=f"Email user not found")
 
-    db_post = db.query(_models_post).filter(_models_post.id == post_id).first()
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if db_post is None:
         return None
 

@@ -10,3 +10,4 @@ class GetEmailUser:
 
     def __call__(self, user: Annotated[JWTUser, Depends(validate_token)]):
         return user.get('email')
+# Bắt lỗi JWT sai

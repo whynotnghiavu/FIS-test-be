@@ -55,10 +55,6 @@ Mã HTTP: 401 user
 <!-- retry_delay: Thời gian chờ thử lại -->
 <!-- retries: Số lần thử lại -->
 
-Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
-
-<!-- @Nhưng tất cả lỗi DB đều bị return -->
-
 <!-- Thêm validate: -->
 <!-- dùng field_validator -->
 <!-- và regex -->
@@ -69,10 +65,14 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 
 <!-- !SSL -->
 
+Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
+Chưa làm được
+
+<!-- @Nhưng tất cả lỗi DB đều bị return -->
+
 <!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
 
 alembic init alembic
-
 alembic upgrade head
 alembic upgrade +1
 alembic downgrade -1
@@ -80,21 +80,20 @@ alembic downgrade -1
 alembic revision --autogenerate -m "first init"
 
 <!-- !alembic -->
+<!-- @ Muốn dùng lệnh -->
+<!-- alembic upgrade head -->
+<!-- trong docker nhưng db chưa khởi động -->
+
+Thêm admin đầu tiên
+Cấu hình trong .env
+
+IF count == 0 thì tạo admin
+Phân quyền chỉ admin mới đăng ký tk mới
+
+<!-- @ Có dùng trực tiếp trong app/api  -->
+<!-- https://gist.github.com/jsmsalt/26bf25844870d59eee17997727e3a631 -->
 
 <!-- # -->
-
-Thêm admin đầu tiên, đăng ký là admin
-Có admin đầu tiên và login ở đăng ký mới
-.env User_name default: admin password default: admin
-IF count =0 thì tạo user admin, password admin
-
-<!-- ! -->
-
-Test đầu api trên postman:
-Làm lại sau
-postman: test
-
-<!-- ! Học Postman -->
 
 <!-- -->
 
@@ -107,17 +106,19 @@ user: email, password, role, xác nhận is2Fa = False; Enable
 tokent: user_id,
 
 <!-- -->
+<!-- ! -->
 
-<!--  -->
+Test đầu api trên postman:
+Làm lại sau
+postman: test
 
-Jwt và auth
-Postman và các tạo test
+<!-- ! Học Postman -->
 
 Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at
 
 <!-- -->
 
-thêm sub id trong jwt
+thêm sub id trong jwt để truy vấn user id trong post comment
 
 Thử hết hạn jwt?
 
@@ -127,17 +128,9 @@ utils check Auto check exits Kiểm tra ràng buộc khóa
 
 Thêm gửi email quên mật khẩu, qr, ... tokent
 
-Thêm logging xóa sau một giờ
-
+<!-- Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env -->
 <!-- ! Học thư viện log -->
 
-Cách loại bỏ thông tin DTO
+Cách loại bỏ thông tin DTO từ Base (ví dụ password)
 
-Thêm gợi ý DTO
-
-<!-- !Kiến thức cần học: -->
-
-Thư viện uvicorn
-Thư viện FastAPI
-
-Thư viện Sqlaichemy: ORM
+Thêm gợi ý DTO có thể dùng fAker
