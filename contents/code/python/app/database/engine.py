@@ -5,6 +5,9 @@ from sqlalchemy.exc import OperationalError
 from sqlalchemy import URL
 
 
+from ..logger import logger
+
+
 SQLALCHEMY_DATABASE_URL = URL.create(
     drivername="mysql+pymysql",
     username=os.getenv("MYSQL_USERNAME", "root"),
@@ -29,11 +32,12 @@ def connect_with_retry():
                 pool_pre_ping=True  # Thực hiện ping
             )
             engine.connect()
-            print("Connection successful!")
+            logger.warning("🐍 File: database/engine.py | Line: 34 | connect_with_retry ~ engine", engine)
+            logger.warning("Connection successful!")
             return engine
         except OperationalError:
             attempt += 1
-            print(f"Connection failed. Retrying in {MYSQL_CONNECT_RETRY_DELAY} seconds... ({attempt}/{MYSQL_CONNECT_RETRIES})")
+            logger.warning(f"Connection failed. Retrying in {MYSQL_CONNECT_RETRY_DELAY} seconds... ({attempt}/{MYSQL_CONNECT_RETRIES})")
             time.sleep(MYSQL_CONNECT_RETRY_DELAY)
     raise Exception(f"Failed to connect after {MYSQL_CONNECT_RETRIES} attempts.")
 

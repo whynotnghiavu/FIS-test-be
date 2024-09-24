@@ -1,9 +1,9 @@
-<!-- Học thư viện pydantic -->
-<!-- Học thư viện datetime -->
-<!-- Học thư viện faker -->
-<!-- Học thư viện typing python -->
-<!-- Học Git -->
-<!-- Học NodeJS MSA có post comment -->
+<!-- thư viện pydantic -->
+<!-- thư viện datetime -->
+<!-- thư viện faker -->
+<!-- thư viện typing python -->
+<!-- Git -->
+<!-- NodeJS MSA có post comment -->
 <!-- mongodb -->
 
 # Coding:
@@ -13,7 +13,6 @@ Xóa thì chỉ return `204 No Content`
 HTTP status=404, detail
 Quy trình chung: Tạo mới, Lấy tất cả, Lấy theo id, Xóa bỏ, Cập nhật
 Mã HTTP: 401 user
-
 
 # Công việc:
 
@@ -91,7 +90,7 @@ Cấu hình trong .env
 IF count == 0 thì tạo admin
 Phân quyền chỉ admin mới đăng ký tk mới
 
-<!-- @ Có dùng trực tiếp trong app/api  -->
+<!-- @ Có dùng trực tiếp trong app/api -->
 <!-- https://gist.github.com/jsmsalt/26bf25844870d59eee17997727e3a631 -->
 
 Xử lý OTP: Dùng thư viện pyotp
@@ -104,32 +103,33 @@ https://it-tools.tech/otp-generator
 
 <!-- https://pinonote.wordpress.com/2018/11/27/thuat-toan-hmac-based-one-time-password-algorithm-hotp-va-time-based-one-time-password-totp-trong-google-authenticator/ -->
 
-<!-- ################### -->
+Thêm logging logger
+xóa sau một giờ, 7 ngày 30 60 90.... env
 
-
-Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env
-<!-- ! Học thư viện log -->
+logger.debug("This is a debug message.")
+logger.info("This is an info message.")
+logger.error("This is an error message.")
+logger.warning("This is a warning message.")
 
 <!-- ! -->
+<!-- ################### -->
 
 Test đầu api trên postman:
 Làm lại sau
 postman: test
 
-<!-- ! Học Postman -->
-
- 
+<!-- ! Postman -->
 
 Thêm gửi email quên mật khẩu: Dùng mailhong
 
-
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
-Cách loại bỏ thông tin DTO từ Base (ví dụ password)
+Cách loại bỏ thông tin DTO từ Base (ví dụ bỏ thông tin password)
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
 Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at
+
 utils check Auto check exits Kiểm tra ràng buộc khóa
 
 Truy vấn bị lỗi do server: dùng ExceptionMiddleware return

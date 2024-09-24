@@ -1,9 +1,7 @@
-PATH: \contents\code\python
-Keywords: ['#']
+PATH: C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python
+Keywords: ['print']
 
 
-
-\contents\code\python\app\schemas\category.py
-\contents\code\python\app\schemas\comment.py
-\contents\code\python\app\schemas\post.py
-\contents\code\python\app\schemas\user.py
+C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python\check_alembic_db.py
+C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python\app\database\engine.py
+C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python\app\seeders\create_superuser.py

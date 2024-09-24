@@ -6,7 +6,11 @@ from ..schemas import user as _schemas_user
 from ..services import user as _services_user
 
 
+from ..logger import logger
+
+
 def create_superuser():
+    logger.info("🐍 File: seeders/create_superuser.py | Line: 10 | undefined ~ create_superuser", create_superuser)
     user = _schemas_user.UserRegister(
         email=os.getenv("EMAIL_ADMIN_DEFAULT", "admin@gmail.com"),
         password=os.getenv("PASSWORD_ADMIN_DEFAULT", "admin@A8"),

@@ -4,7 +4,6 @@ from fastapi import FastAPI
 from .database.create_db import create_db
 from .seeders.create_superuser import create_superuser
 
-
 from .routers import user
 from .routers import category
 from .routers import post
