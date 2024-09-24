@@ -16,8 +16,8 @@ import qrcode
 from io import BytesIO
 
 
-from ..services.role_checker import RoleChecker
 from ..models import Role
+from ..services.role_checker import RoleChecker
 
 
 router = APIRouter(prefix="/users")

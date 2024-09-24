@@ -52,6 +52,7 @@ def validate_token(token=Depends(reusable_oauth2)) -> str:
     except (jwt.PyJWTError, ValidationError):
         raise HTTPException(status_code=403, detail="Could not validate credentials")
 
+
 def validate_otp(token=Depends(reusable_oauth2)) -> str:
     try:
         payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
@@ -67,4 +68,3 @@ def validate_otp(token=Depends(reusable_oauth2)) -> str:
 
     except (jwt.PyJWTError, ValidationError):
         raise HTTPException(status_code=403, detail="Could not validate credentials")
-

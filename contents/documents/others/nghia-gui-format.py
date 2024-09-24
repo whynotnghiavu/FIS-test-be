@@ -43,19 +43,7 @@ def format(directory):
 
 if __name__ == "__main__":
     paths = [
-        # "/home/vvn20206205/Desktop/einvoice-system/microservices/api-gateway/src",
-        # "/home/vvn20206205/Desktop/einvoice-system/microservices/user-service/src",
-        # "/home/vvn20206205/Desktop/einvoice-system/microservices/invoice-service/src",
-        # "/home/vvn20206205/Desktop/einvoice-system/microservices/tct-demo/src",
-        # "/home/vvn20206205/Desktop/vuvannghia/src",
-        # "/home/vvn20206205/Desktop/einvoice-system/microservices/report-service/src",
-        # "C:\\Users\\vvn20206205\\Downloads\\Nghia\\Git\\whynotnghiavu",
-        # "C:\\Users\\vvn20206205\\Downloads\\Nghia\\Git\\whynotnghiavu\\nghia-contact-manager",
-        # r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\nghia-extensions-video-VN\contents",
-
-        # r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\VideoVN",
-        # r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu",
-        r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python",
+           r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python",
     ]
     for path in paths:
         format(path)

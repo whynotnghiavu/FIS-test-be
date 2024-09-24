@@ -23,44 +23,12 @@ def find(directory, keywords, extensions, output_file=None, ignore_folders=None)
 
 if __name__ == "__main__":
     #! INPUT
-    folder_path = r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\VideoVN"
-    folder_path = r"C:\Users\vvn20206205\Downloads\Nghia\Git"
     folder_path = r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python"
 
 
      
     keywords = [
-
-        # "replace",
-        # "MyNewPath",
-
-        #  "NOTE",
-
-        # "os.path.exists",
-        #  "MyLog",
-
-
-        #  "ChuyenAmThanh",
-
-        #  "🐍",
-
-        # "#",
-
-
-        #  "print",
-        # "link",
-        # "encoding",
-
-
-        # "company20206205",
-        # "websoket", 
-        # "FPT",
-        "MyLog",
-        # "return",
-        # "int",
-        # "with open",
-        # "exists",
-        # "os",
+        "#",
 # 
 
     ]

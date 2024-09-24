@@ -32,9 +32,9 @@ def connect_with_retry():
             print("Connection successful!")
             import subprocess
             subprocess.run(["alembic", "upgrade", "head"])
-            
+
             break
-        
+
         except OperationalError:
             attempt += 1
             print(f"Connection failed. Retrying in {MYSQL_CONNECT_RETRY_DELAY} seconds... ({attempt}/{MYSQL_CONNECT_RETRIES})")
