@@ -23,6 +23,16 @@ from ..services.role_checker import RoleChecker
 router = APIRouter(prefix="/users")
 
 
+
+@router.post('/register')
+def register(
+    user: _schemas_user.UserRegister,
+    _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    otp: Annotated[bool, Depends(validate_otp)],
+    db: Session = Depends(get_db)
+):
+    return _services_user.register(user, db)
+
 @router.post('/login')
 def login(
     user: _schemas_user.UserLogin,
@@ -53,13 +63,3 @@ def verify_otp(
     db: Session = Depends(get_db)
 ):
     return _services_user.verify_otp(otp, user_id, db)
-
-
-@router.post('/register')
-def register(
-    user: _schemas_user.UserRegister,
-    _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
-    otp: Annotated[bool, Depends(validate_otp)],
-    db: Session = Depends(get_db)
-):
-    return _services_user.register(user, db)
