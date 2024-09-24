@@ -111,16 +111,27 @@ logger.info("This is an info message.")
 logger.error("This is an error message.")
 logger.warning("This is a warning message.")
 
-<!-- ! -->
 <!-- ################### -->
 
-Test đầu api trên postman:
-Làm lại sau
-postman: test
+Test đầu api trên postman: Làm lại sau
+
+{{url_api_v1}}/users/login
+{{url_api_v1}}/users/generate-qr
+{{url_api_v1}}/users/verify-otp
+
+{{url_api_v1}}/categories
+{{url_api_v1}}/categories/{category_id}
+
+{{url_api_v1}}/posts
+{{url_api_v1}}/posts/{post_id}
+
+{{url_api_v1}}/posts/{post_id}/comments
+{{url_api_v1}}/posts/{post_id}/comments/{comment_id}
 
 <!-- ! Postman -->
 
 Thêm gửi email quên mật khẩu: Dùng mailhong
+Thêm đổi mật khẩu 
 
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
