@@ -1,4 +1,4 @@
-# from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 # from sqlalchemy.orm import Session
 # from typing import List
 # from typing import Annotated
@@ -12,7 +12,7 @@
 # from ..services.get_email_user import GetEmailUser
 
 
-# router = APIRouter(prefix="/posts/{post_id}/comments")
+router = APIRouter(prefix="/posts/{post_id}/comments")
 
 
 # @router.post("", response_model=_schemas_comment.Comment)

@@ -6,9 +6,9 @@ from .seeders.create_superuser import create_superuser
 
 
 from .routers import user
-# from .routers import category
-# from .routers import post
-# from .routers import comment
+from .routers import category
+from .routers import post
+from .routers import comment
 
 
 create_db()
@@ -20,11 +20,10 @@ app = FastAPI(
 )
 
 
- 
 app.include_router(user.router, prefix=f"/api/v1", tags=["users"])
-# app.include_router(category.router, prefix=f"/api/v1", tags=["categories"])
-# # app.include_router(post.router, prefix=f"/api/v1", tags=["posts"])
-# # app.include_router(comment.router, prefix=f"/api/v1", tags=["comments"])
+app.include_router(category.router, prefix=f"/api/v1", tags=["categories"])
+app.include_router(post.router, prefix=f"/api/v1", tags=["posts"])
+app.include_router(comment.router, prefix=f"/api/v1", tags=["comments"])
 
 
 @app.get("/")

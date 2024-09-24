@@ -1,4 +1,4 @@
-# from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 # from sqlalchemy.orm import Session
 # from typing import List
 # from typing import Annotated
@@ -12,7 +12,7 @@
 # from ..services.get_email_user import GetEmailUser
 
 
-# router = APIRouter(prefix="/posts")
+router = APIRouter(prefix="/posts")
 
 
 # @router.post("", response_model=_schemas_post.Post)
@@ -59,4 +59,4 @@
 #     deleted_post = _services_post.remove(post_id, email, db)
 #     if deleted_post is None:
 #         raise HTTPException(status_code=404, detail="Post not found")
-#     return  
+#     return

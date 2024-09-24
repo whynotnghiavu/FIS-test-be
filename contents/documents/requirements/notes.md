@@ -8,12 +8,12 @@
 
 # Coding:
 
+Hàm routers = def (): thì để `):` bên dưới
 Xóa thì chỉ return `204 No Content`
-Dùng password_hash trong db cho rõ nghĩa
 HTTP status=404, detail
-Hàm def (): thì để `):` bên dưới
 Quy trình chung: Tạo mới, Lấy tất cả, Lấy theo id, Xóa bỏ, Cập nhật
 Mã HTTP: 401 user
+
 
 # Công việc:
 
@@ -94,12 +94,8 @@ Phân quyền chỉ admin mới đăng ký tk mới
 <!-- @ Có dùng trực tiếp trong app/api  -->
 <!-- https://gist.github.com/jsmsalt/26bf25844870d59eee17997727e3a631 -->
 
-<!-- ################### -->
-
 Xử lý OTP: Dùng thư viện pyotp
 https://it-tools.tech/otp-generator
-
-is2Fa = False; Enable
 
 <!-- !pyotp -->
 <!-- https://pyauth.github.io/pyotp -->
@@ -108,15 +104,12 @@ is2Fa = False; Enable
 
 <!-- https://pinonote.wordpress.com/2018/11/27/thuat-toan-hmac-based-one-time-password-algorithm-hotp-va-time-based-one-time-password-totp-trong-google-authenticator/ -->
 
-<!-- -->
+<!-- ################### -->
 
-<!-- !3 cái này làm xong thì xóa báo cáo -->
 
-<!-- thêm sub id trong jwt để truy vấn user id trong post comment `tokent: user_id,` -->
 
-<!-- Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at -->
-
-<!-- Thử hết hạn jwt? 2 giây -->
+Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env
+<!-- ! Học thư viện log -->
 
 <!-- ! -->
 
@@ -126,13 +119,10 @@ postman: test
 
 <!-- ! Học Postman -->
 
-<!-- -->
+ 
 
-<!-- Thêm gửi email quên mật khẩu  : Dùng mailhong -->
+Thêm gửi email quên mật khẩu: Dùng mailhong
 
-
-<!-- Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env -->
-<!-- ! Học thư viện log -->
 
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
@@ -140,10 +130,10 @@ Cách loại bỏ thông tin DTO từ Base (ví dụ password)
 
 1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
 
+Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at
 utils check Auto check exits Kiểm tra ràng buộc khóa
 
 Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 `Chưa làm được`
 
 <!-- @Nhưng tất cả lỗi DB đều bị return -->
-

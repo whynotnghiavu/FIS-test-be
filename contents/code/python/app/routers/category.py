@@ -1,4 +1,4 @@
-# from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 # from sqlalchemy.orm import Session
 # from typing import List, Annotated
 
@@ -11,7 +11,7 @@
 # from ..services.role_checker import RoleChecker
 
 
-# router = APIRouter(prefix="/categories")
+router = APIRouter(prefix="/categories")
 
 
 # @router.post("", response_model=_schemas_category.Category)
