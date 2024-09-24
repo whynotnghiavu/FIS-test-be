@@ -38,9 +38,15 @@ class UserRegister(BaseModel):
     role: Role
 
 
-# class UserLogin(UserBase):
-#     pass
+class UserLogin(BaseModel):
+    email: str
+    password: str
 
+class User(BaseModel):
+    id: int
+    email: str
+    role: Role
+ 
 
 # class User(UserBase):
 #     id: int
