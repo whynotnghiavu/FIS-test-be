@@ -57,7 +57,10 @@ class User(BaseModel):
 #         from_attributes = True
 
 
-# class JWTUser(User):
-#     #  hạn jwt
-#     # otp... hạn otp
-#     pass
+class JWTUser(User):
+    user_id: int
+    role: Role
+    jwt_expire: str
+    otp_expire: str
+
+ 

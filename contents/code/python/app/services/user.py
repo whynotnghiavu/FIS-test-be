@@ -1,3 +1,4 @@
+import pyotp
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
@@ -26,9 +27,6 @@ def create_superuser(user: _schemas_user.UserRegister, db: Session):
         db.refresh(new_user)
 
 
-
-
-
 def login(user: _schemas_user.UserLogin, db: Session):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if not db_user:
@@ -39,6 +37,25 @@ def login(user: _schemas_user.UserLogin, db: Session):
 
     return auth.generate_token(db_user)
 
+
+def generate_qr(user_id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail=f"User not found")
+
+    if not db_user.otp_secret:
+        db_user.otp_secret = pyotp.random_base32()
+        db.commit()
+        db.refresh(db_user)
+
+    otp_secret = db_user.otp_secret
+
+    totp = pyotp.TOTP(otp_secret)
+
+    return totp.provisioning_uri(
+        issuer_name="Test Kĩ Năng Backend",
+        name=str(user_id)
+    )
 
 
 # def register(user: _schemas_user.UserRegister, db: Session):
@@ -53,4 +70,3 @@ def login(user: _schemas_user.UserLogin, db: Session):
 #     db.refresh(new_user)
 
 #     return auth.generate_token(new_user)
-

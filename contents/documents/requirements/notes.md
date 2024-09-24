@@ -73,7 +73,7 @@ alembic upgrade +1
 alembic downgrade -1
 alembic history
 
-alembic revision --autogenerate -m "first init user"
+alembic revision --autogenerate -m "add otp_secret to user"
 
 <!-- !alembic -->
 <!-- @ Muốn dùng lệnh -->

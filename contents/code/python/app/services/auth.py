@@ -1,9 +1,9 @@
 import os
 import jwt
-# from fastapi.security import HTTPBearer
-# from fastapi import Depends, HTTPException
+from fastapi.security import HTTPBearer
+from fastapi import Depends, HTTPException
 from datetime import datetime, timedelta
-# from pydantic import ValidationError
+from pydantic import ValidationError
 
 
 from ..schemas import user as _schemas_user
@@ -15,9 +15,9 @@ JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", 60 * 60 * 24 * 3))
 OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 * 60 * 24 * 2))
 
 
-# reusable_oauth2 = HTTPBearer(
-#     scheme_name='Authorization'
-# )
+reusable_oauth2 = HTTPBearer(
+    scheme_name='Authorization'
+)
 
 
 def generate_token(user: _schemas_user.User):
@@ -38,18 +38,35 @@ def generate_token(user: _schemas_user.User):
     return {"token": encoded_jwt}
 
 
-# def validate_token(token=Depends(reusable_oauth2)) -> str:
-#     try:
-#         payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
+def validate_otp(token=Depends(reusable_oauth2)) -> str:
+    try:
+        payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
 
-#         exp_time = datetime.fromtimestamp(payload.get('exp'))
-#         if exp_time < datetime.now():
-#             raise HTTPException(status_code=403, detail="Token expired")
+        otp_expire = datetime.fromtimestamp(payload.get('otp_expire'))
+        if otp_expire < datetime.now():
+            raise HTTPException(status_code=403, detail="OTP expired")
 
-#         return {
-#             "email": payload.get('email'),
-#             "role": payload.get('role'),
-#         }
+        return {
+            "user_id": payload.get('user_id'),
+            "role": payload.get('role'),
+        }
 
-#     except (jwt.PyJWTError, ValidationError):
-#         raise HTTPException(status_code=403, detail="Could not validate credentials")
+    except (jwt.PyJWTError, ValidationError):
+        raise HTTPException(status_code=403, detail="Could not validate credentials")
+
+
+def validate_token(token=Depends(reusable_oauth2)) -> str:
+    try:
+        payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
+
+        jwt_expire = datetime.fromtimestamp(payload.get('jwt_expire'))
+        if jwt_expire < datetime.now():
+            raise HTTPException(status_code=403, detail="Token expired")
+
+        return {
+            "user_id": payload.get('user_id'),
+            "role": payload.get('role'),
+        }
+
+    except (jwt.PyJWTError, ValidationError):
+        raise HTTPException(status_code=403, detail="Could not validate credentials")
