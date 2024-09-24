@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException,status
 from sqlalchemy.orm import Session
 
 from ..schemas import post as _schemas_post
@@ -9,11 +9,11 @@ from .. import models
 def create(post: _schemas_post.PostCreate, user_id: int, db: Session):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail=f"User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
     db_category = db.query(models.Category).filter(models.Category.id == post.category_id).first()
     if not db_category:
-        raise HTTPException(status_code=400, detail=f"Category not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category not found")
 
     new_post = models.Post(user_id=user_id, **post.model_dump())
     db.add(new_post)
@@ -29,23 +29,23 @@ def get_all(db: Session, skip: int = 0, limit: int = 100):
 def get_by_id(post_id: int, db: Session):
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if not db_post:
-        raise HTTPException(status_code=404, detail="Post not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
     return db.query(models.Post).filter(models.Post.id == post_id).first()
 
 
 def update(post_id: int, post: _schemas_post.PostUpdate, user_id: int, db: Session):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail=f"User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
     if post.category_id != None:
         db_category = db.query(models.Category).filter(models.Category.id == post.category_id).first()
         if not db_category:
-            raise HTTPException(status_code=400, detail=f"Category not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category not found")
 
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if    not db_post  :
-        raise HTTPException(status_code=404, detail="Post not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
 
     if db_post.user_id != user_id:
@@ -61,11 +61,11 @@ def update(post_id: int, post: _schemas_post.PostUpdate, user_id: int, db: Sessi
 def remove(post_id: int, user_id: int, db: Session):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail=f"User not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if    not db_post  :
-        raise HTTPException(status_code=404, detail="Post not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
 
     if db_post.user_id != user_id:

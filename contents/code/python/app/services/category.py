@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException,status
 from sqlalchemy.orm import Session
 
 
@@ -26,14 +26,14 @@ def get_all(db: Session, skip: int = 0, limit: int = 100):
 def get_by_id(category_id: int, db: Session):
     db_category = db.query(models.Category).filter(models.Category.id == category_id).first()
     if not db_category:
-        raise HTTPException(status_code=404, detail="Category not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
     return db.query(models.Category).filter(models.Category.id == category_id).first()
 
 
 def update(category_id: int, category: _schemas_category.CategoryUpdate, db: Session):
     db_category = db.query(models.Category).filter(models.Category.id == category_id).first()
     if not db_category:
-        raise HTTPException(status_code=404, detail="Category not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
 
     if category.name:
         existing_category = db.query(models.Category).filter(
@@ -54,7 +54,7 @@ def update(category_id: int, category: _schemas_category.CategoryUpdate, db: Ses
 def remove(category_id: int, db: Session):
     db_category = db.query(models.Category).filter(models.Category.id == category_id).first()
     if not db_category:
-        raise HTTPException(status_code=404, detail="Category not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
 
     db.delete(db_category)
     db.commit()
