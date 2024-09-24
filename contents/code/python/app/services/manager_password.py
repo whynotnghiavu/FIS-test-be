@@ -1,6 +1,6 @@
 import bcrypt
 
-# DÙng thư viện chuẩn
+
 def hash_password(password: str) -> str:
     password_bytes = password.encode('utf-8')
 
