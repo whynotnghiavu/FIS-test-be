@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,status
 from sqlalchemy.orm import Session
 from typing import List
 from typing import Annotated
@@ -16,7 +16,7 @@ from ..services.get_user_id import GetUserId
 router = APIRouter(prefix="/posts")
 
 
-@router.post("", response_model=_schemas_post.Post)
+@router.post("", response_model=_schemas_post.Post, status_code=status.HTTP_201_CREATED)
 def create_post(
     post: _schemas_post.PostCreate,
     user_id: Annotated[str, Depends(GetUserId())],
@@ -45,7 +45,7 @@ def update_post(
     return _services_post.update(post_id, post, user_id, db)
 
 
-@router.delete("/{post_id}", status_code=204)
+@router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(
         post_id: int,
     user_id: Annotated[str, Depends(GetUserId())],

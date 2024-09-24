@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,status
 from sqlalchemy.orm import Session
 from ..database.get_db import get_db
 
@@ -16,7 +16,7 @@ from ..services.role_checker import RoleChecker
 router = APIRouter(prefix="/categories")
 
 
-@router.post("", response_model=_schemas_category.Category)
+@router.post("", response_model=_schemas_category.Category, status_code=status.HTTP_201_CREATED)
 def create_category(
     category: _schemas_category.CategoryCreate,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
@@ -45,7 +45,7 @@ def update_category(
     return _services_category.update(category_id, category, db)
 
 
-@router.delete("/{category_id}", status_code=204)
+@router.delete("/{category_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_category(
     category_id: int,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],

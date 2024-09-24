@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,status
 from sqlalchemy.orm import Session
 from typing import List
 from typing import Annotated
@@ -17,7 +17,7 @@ from ..services.get_user_id import GetUserId
 router = APIRouter(prefix="/posts/{post_id}/comments")
 
 
-@router.post("", response_model=_schemas_comment.Comment)
+@router.post("", response_model=_schemas_comment.Comment, status_code=status.HTTP_201_CREATED)
 def create_comment(
     post_id: int,
     comment: _schemas_comment.CommentCreate,
@@ -47,7 +47,7 @@ def update_comment(
     return _services_comment.update(comment_id, comment, user_id, db)
 
 
-@router.delete("/{comment_id}", status_code=204)
+@router.delete("/{comment_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_comment(
     comment_id: int,
     user_id: Annotated[str, Depends(GetUserId())],

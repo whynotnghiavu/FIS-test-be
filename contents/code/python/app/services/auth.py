@@ -1,7 +1,7 @@
 import os
 import jwt
 from fastapi.security import HTTPBearer
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException,status
 from datetime import datetime, timedelta
 from pydantic import ValidationError
 
@@ -42,7 +42,7 @@ def validate_token(token=Depends(reusable_oauth2)) -> str:
 
         jwt_expire = datetime.fromtimestamp(payload.get('jwt_expire'))
         if jwt_expire < datetime.now():
-            raise HTTPException(status_code=403, detail="Token expired")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Token expired")
 
         return {
             "user_id": payload.get('user_id'),
@@ -50,7 +50,7 @@ def validate_token(token=Depends(reusable_oauth2)) -> str:
         }
 
     except (jwt.PyJWTError, ValidationError):
-        raise HTTPException(status_code=403, detail="Could not validate credentials")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials")
 
 
 def validate_otp(token=Depends(reusable_oauth2)) -> str:
@@ -59,7 +59,7 @@ def validate_otp(token=Depends(reusable_oauth2)) -> str:
 
         otp_expire = datetime.fromtimestamp(payload.get('otp_expire'))
         if otp_expire < datetime.now():
-            raise HTTPException(status_code=403, detail="OTP expired")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="OTP expired")
 
         return {
             "user_id": payload.get('user_id'),
@@ -67,4 +67,4 @@ def validate_otp(token=Depends(reusable_oauth2)) -> str:
         }
 
     except (jwt.PyJWTError, ValidationError):
-        raise HTTPException(status_code=403, detail="Could not validate credentials")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials")

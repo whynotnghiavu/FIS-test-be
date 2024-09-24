@@ -73,14 +73,14 @@ def verify_otp(otp: int, user_id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
     if not db_user.otp_secret:
-        raise HTTPException(status_code=400, detail=f"User has not scanned otp")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User has not scanned otp")
 
     otp_secret = db_user.otp_secret
 
     totp = pyotp.TOTP(otp_secret)
 
     if not totp.verify(otp):
-        raise HTTPException(status_code=400, detail=f"OTP code is incorrect")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"OTP code is incorrect")
 
     return auth.generate_token(db_user)
 

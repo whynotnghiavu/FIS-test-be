@@ -49,7 +49,7 @@ def update(post_id: int, post: _schemas_post.PostUpdate, user_id: int, db: Sessi
 
 
     if db_post.user_id != user_id:
-        raise HTTPException(status_code=400, detail=f"User is not the owner of the post")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the post")
 
     for key, value in post.model_dump(exclude_unset=True).items():
         setattr(db_post, key, value)
@@ -69,7 +69,7 @@ def remove(post_id: int, user_id: int, db: Session):
 
 
     if db_post.user_id != user_id:
-        raise HTTPException(status_code=400, detail=f"User is not the owner of the post")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the post")
 
     db.delete(db_post)
     db.commit()

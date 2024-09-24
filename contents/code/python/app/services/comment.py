@@ -52,7 +52,7 @@ def update(comment_id: int, comment: _schemas_comment.CommentUpdate, user_id: in
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Comment not found")
 
     if db_comment.user_id != user_id:
-        raise HTTPException(status_code=400, detail=f"User is not the owner of the comment")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the comment")
 
     for key, value in comment.model_dump(exclude_unset=True).items():
         setattr(db_comment, key, value)
@@ -71,7 +71,7 @@ def remove(comment_id: int, user_id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Comment not found")
 
     if db_comment.user_id != user_id:
-        raise HTTPException(status_code=403, detail=f"User is not the owner of the comment")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the comment")
 
     db.delete(db_comment)
     db.commit()

@@ -10,7 +10,7 @@ from .. import models
 def create(category: _schemas_category.CategoryCreate, db: Session):
     db_category = db.query(models.Category).filter(models.Category.name == category.name).first()
     if db_category:
-        raise HTTPException(status_code=400, detail=f"Category with name '{category.name}' already exists.")
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=f"Category with name '{category.name}' already exists.")
 
     new_category = models.Category(**category.model_dump())
     db.add(new_category)
@@ -42,7 +42,7 @@ def update(category_id: int, category: _schemas_category.CategoryUpdate, db: Ses
         ).first()
 
         if existing_category:
-            raise HTTPException(status_code=400, detail=f"Category with name '{category.name}' already exists.")
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=f"Category with name '{category.name}' already exists.")
 
     for key, value in category.model_dump(exclude_unset=True).items():
         setattr(db_category, key, value)
