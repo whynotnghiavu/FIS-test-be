@@ -71,6 +71,7 @@ alembic init alembic
 alembic upgrade head
 alembic upgrade +1
 alembic downgrade -1
+alembic history
 
 alembic revision --autogenerate -m "first init"
 
@@ -123,7 +124,7 @@ postman: test
 
 <!-- -->
 
-<!-- Thêm gửi email quên mật khẩu  -->
+<!-- Thêm gửi email quên mật khẩu  : Dùng mailhong -->
 
 
 <!-- Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env -->
