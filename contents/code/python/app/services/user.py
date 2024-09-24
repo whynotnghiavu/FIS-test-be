@@ -16,10 +16,6 @@ def create_superuser(user: _schemas_user.UserRegister, db: Session):
     count_user = db.query(models.User).count()
 
     if count_user == 0:
-        db_user = db.query(models.User).filter(models.User.email == user.email).first()
-        if db_user:
-            raise HTTPException(status_code=400, detail=f"Email '{user.email}' already exists.")
-
         user.password = manager_password.hash_password(user.password)
         new_user = models.User(**user.model_dump())
         db.add(new_user)
@@ -72,21 +68,19 @@ def verify_otp(otp: int, user_id: int, db: Session):
 
     if not totp.verify(otp):
         raise HTTPException(status_code=400, detail=f"OTP code is incorrect")
-    
 
     return auth.generate_token(db_user)
 
 
+def register(user: _schemas_user.UserRegister, db: Session):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if db_user:
+        raise HTTPException(status_code=400, detail=f"Email '{user.email}' already exists.")
 
-# def register(user: _schemas_user.UserRegister, db: Session):
-#     db_user = db.query(models.User).filter(models.User.email == user.email).first()
-#     if db_user:
-#         raise HTTPException(status_code=400, detail=f"Email '{user.email}' already exists.")
+    user.password = manager_password.hash_password(user.password)
+    new_user = models.User(**user.model_dump())
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
 
-#     user.password = manager_password.hash_password(user.password)
-#     new_user = models.User(**user.model_dump())
-#     db.add(new_user)
-#     db.commit()
-#     db.refresh(new_user)
-
-#     return auth.generate_token(new_user)
+    return auth.generate_token(new_user, time_otp_expire=0)

@@ -8,25 +8,19 @@ from ..schemas import user as _schemas_user
 
 from ..services import user as _services_user
 from ..services.get_user_id import GetUserId
+from ..services.auth import validate_otp
 
-# from ..services.role_checker import RoleChecker
-# from ..models import Role
 
 from fastapi.responses import StreamingResponse
 import qrcode
 from io import BytesIO
 
 
+from ..services.role_checker import RoleChecker
+from ..models import Role
+
+
 router = APIRouter(prefix="/users")
-
-
-# @router.post('/register')
-# def register(
-#     user: _schemas_user.UserRegister,
-#     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
-#     db: Session = Depends(get_db)
-# ):
-#     return _services_user.register(user, db)
 
 
 @router.post('/login')
@@ -58,5 +52,14 @@ def verify_otp(
     user_id: Annotated[str, Depends(GetUserId())],
     db: Session = Depends(get_db)
 ):
-    return  _services_user.verify_otp(otp, user_id, db)
+    return _services_user.verify_otp(otp, user_id, db)
 
+
+@router.post('/register')
+def register(
+    user: _schemas_user.UserRegister,
+    _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    otp: Annotated[bool, Depends(validate_otp)],
+    db: Session = Depends(get_db)
+):
+    return _services_user.register(user, db)
