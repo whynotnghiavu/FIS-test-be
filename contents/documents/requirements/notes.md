@@ -61,14 +61,9 @@ Mã HTTP: 401 user
 
 <!-- !regex -->
 
-
 <!-- Chuyển từ http sang https -->
 <!-- !SSL -->
 
-Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
-Chưa làm được
-
-<!-- @Nhưng tất cả lỗi DB đều bị return -->
 
 <!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
 
@@ -83,6 +78,7 @@ alembic revision --autogenerate -m "first init"
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
 <!-- trong docker nhưng db chưa khởi động -->
+<!-- dùng file .sh -->
 
 Thêm admin đầu tiên
 Cấu hình trong .env
@@ -95,7 +91,7 @@ Phân quyền chỉ admin mới đăng ký tk mới
 
 <!-- ################### -->
 
-Xử lý OTP: Dùng  thư viện pyotp
+Xử lý OTP: Dùng thư viện pyotp
 https://it-tools.tech/otp-generator
 
 is2Fa = False; Enable
@@ -108,6 +104,15 @@ is2Fa = False; Enable
 <!-- https://pinonote.wordpress.com/2018/11/27/thuat-toan-hmac-based-one-time-password-algorithm-hotp-va-time-based-one-time-password-totp-trong-google-authenticator/ -->
 
 <!-- -->
+
+<!-- !3 cái này làm xong thì xóa báo cáo -->
+
+<!-- thêm sub id trong jwt để truy vấn user id trong post comment `tokent: user_id,` -->
+
+<!-- Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at -->
+
+<!-- Thử hết hạn jwt? 2 giây -->
+
 <!-- ! -->
 
 Test đầu api trên postman:
@@ -116,23 +121,23 @@ postman: test
 
 <!-- ! Học Postman -->
 
-Thêm 2 class Minxi chung: Tên bảng và thời gian create_at, update_at
-
 <!-- -->
 
-thêm sub id trong jwt để truy vấn user id trong post comment `tokent: user_id,`
+<!-- Thêm gửi email quên mật khẩu  -->
 
-Thử hết hạn jwt?
-
-utils check Auto check exits Kiểm tra ràng buộc khóa
-
-1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
-
-Thêm gửi email quên mật khẩu, qr, ... tokent
 
 <!-- Thêm logging xóa sau một giờ, 7 ngày 30 60 90.... env -->
 <!-- ! Học thư viện log -->
 
+<!-- Thêm gợi ý DTO có thể dùng fAker -->
+
 Cách loại bỏ thông tin DTO từ Base (ví dụ password)
 
-Thêm gợi ý DTO có thể dùng fAker
+1 post có nhiều category và 1 category có nhiều post (có 1 bảng trung gian)
+
+utils check Auto check exits Kiểm tra ràng buộc khóa
+
+Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
+`Chưa làm được`
+
+<!-- @Nhưng tất cả lỗi DB đều bị return -->
