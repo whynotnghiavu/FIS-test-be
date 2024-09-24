@@ -54,6 +54,7 @@ def generate_qr(user_id: int, db: Session):
 
     if not db_user.otp_secret:
         db_user.otp_secret = pyotp.random_base32()
+        # Mã hóa kiểu khác RSA....
         db.commit()
         db.refresh(db_user)
 

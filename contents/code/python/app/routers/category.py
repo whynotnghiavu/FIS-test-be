@@ -11,6 +11,7 @@ from ..services import category as _services_category
 
 from ..models import Role
 from ..services.role_checker import RoleChecker
+from ..services.auth import validate_otp
 
 
 router = APIRouter(prefix="/categories")
@@ -20,6 +21,7 @@ router = APIRouter(prefix="/categories")
 def create_category(
     category: _schemas_category.CategoryCreate,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
     return _services_category.create(category, db)

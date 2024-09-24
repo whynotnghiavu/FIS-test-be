@@ -8,7 +8,6 @@ from ..schemas import user as _schemas_user
 
 from ..services import user as _services_user
 from ..services.get_user_id import GetUserId
-from ..services.auth import validate_otp
 
 
 from fastapi.responses import StreamingResponse
@@ -18,6 +17,7 @@ from io import BytesIO
 
 from ..models import Role
 from ..services.role_checker import RoleChecker
+from ..services.auth import validate_otp
 
 
 router = APIRouter(prefix="/users")
@@ -28,9 +28,10 @@ router = APIRouter(prefix="/users")
 def register(
     user: _schemas_user.UserRegister,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
-    otp: Annotated[bool, Depends(validate_otp)],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
+
     return _services_user.register(user, db)
 
 @router.post('/login')
@@ -49,6 +50,7 @@ def generate_qr(
     otp_url = _services_user.generate_qr(user_id, db)
 
     qr_img = qrcode.make(otp_url)
+    # save image base 64 SQL
     img_io = BytesIO()
     qr_img.save(img_io, 'PNG')
     img_io.seek(0)

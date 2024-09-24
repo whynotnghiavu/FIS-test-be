@@ -12,7 +12,9 @@ from ..schemas import user as _schemas_user
 JWT_SECURITY_ALGORITHM = os.getenv("JWT_SECURITY_ALGORITHM", "HS256")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "SECRET_KEY")
 JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", 60 * 60 * 24 * 3))
-OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 * 60 * 24 * 2))
+# OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 * 60 * 24 * 2))
+# OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 ))
+OTP_EXPIRE_SECONDS = 60
 
 
 reusable_oauth2 = HTTPBearer(
@@ -20,7 +22,7 @@ reusable_oauth2 = HTTPBearer(
 )
 
 
-def generate_token(user: _schemas_user.User, time_otp_expire=JWT_EXPIRE_SECONDS):
+def generate_token(user: _schemas_user.User, time_otp_expire=OTP_EXPIRE_SECONDS):
     jwt_expire = datetime.now() + timedelta(seconds=JWT_EXPIRE_SECONDS)
     otp_expire = datetime.now() + timedelta(seconds=time_otp_expire)
 
