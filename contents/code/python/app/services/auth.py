@@ -19,8 +19,8 @@ from ..schemas import user as _schemas_user
 # )
 
 
-def generate_token(user: _schemas_user.User):
-    print("🐍 File: services/auth.py | Line: 26 | undefined ~ user", user)
+# def generate_token(user: _schemas_user.User):
+#     print("🐍 File: services/auth.py | Line: 26 | undefined ~ user", user)
     # expire = datetime.now() + timedelta(seconds=JWT_EXPIRE_SECONDS)
 
 #     to_encode = {

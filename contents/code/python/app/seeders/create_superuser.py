@@ -1,9 +1,9 @@
 import os
-from ..get_db import get_db
+from ..database.get_db import get_db
 
-from ...models import Role
-from ...schemas import user as _schemas_user
-from ...services import user as _services_user
+from ..models import Role
+from ..schemas import user as _schemas_user
+from ..services import user as _services_user
 
 
 def create_superuser():

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 
 from .database.create_db import create_db
-from .database.seeders.create_superuser import create_superuser
+from .seeders.create_superuser import create_superuser
 
 
 # from .routers import user
