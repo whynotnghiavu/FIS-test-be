@@ -26,7 +26,6 @@ def format(directory):
                 if os.name == 'nt':
                     pyautogui.hotkey('ctrl', 'a')
                     pyautogui.hotkey('ctrl', '/')
-                    exit()
                 # elif os.name == 'posix':
                 #     pyautogui.hotkey('alt', 'shift', 'o')
                 sleep(1)

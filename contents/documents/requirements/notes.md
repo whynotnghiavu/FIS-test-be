@@ -64,7 +64,7 @@ Mã HTTP: 401 user
 <!-- Chuyển từ http sang https -->
 <!-- !SSL -->
 
-
+<!-- Dùng alembic quản lý SQL -->
 <!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
 
 alembic init alembic
@@ -73,7 +73,7 @@ alembic upgrade +1
 alembic downgrade -1
 alembic history
 
-alembic revision --autogenerate -m "first init"
+alembic revision --autogenerate -m "first init user"
 
 <!-- !alembic -->
 <!-- @ Muốn dùng lệnh -->
