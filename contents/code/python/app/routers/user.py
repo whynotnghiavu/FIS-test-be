@@ -17,7 +17,6 @@ import qrcode
 from io import BytesIO
 
 
-
 router = APIRouter(prefix="/users")
 
 
@@ -51,11 +50,13 @@ def generate_qr(
     img_io.seek(0)
 
     return StreamingResponse(img_io, media_type="image/png")
- 
- 
-# @router.post("/verify_OTP")
-# def verify_OTP():
-#     return True
 
-# # # API: Verify   OTP
-# # totp.verify('492039')  # => True
+
+@router.post("/verify-otp")
+def verify_otp(
+    otp: str,
+    user_id: Annotated[str, Depends(GetUserId())],
+    db: Session = Depends(get_db)
+):
+    return  _services_user.verify_otp(otp, user_id, db)
+

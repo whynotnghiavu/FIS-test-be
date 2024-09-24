@@ -20,11 +20,9 @@ reusable_oauth2 = HTTPBearer(
 )
 
 
-def generate_token(user: _schemas_user.User):
+def generate_token(user: _schemas_user.User, time_otp_expire=JWT_EXPIRE_SECONDS):
     jwt_expire = datetime.now() + timedelta(seconds=JWT_EXPIRE_SECONDS)
-    # otp_expire = datetime.now() + timedelta(seconds=OTP_EXPIRE_SECONDS)
-    # Để hết hạn thì phải OTP
-    otp_expire = datetime.now()
+    otp_expire = datetime.now() + timedelta(seconds=time_otp_expire)
 
     to_encode = {
         "user_id": user.id,

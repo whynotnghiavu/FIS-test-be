@@ -35,7 +35,7 @@ def login(user: _schemas_user.UserLogin, db: Session):
     if not manager_password.verify_password(user.password, db_user.password):
         raise HTTPException(status_code=400, detail=f"Incorrect login information")
 
-    return auth.generate_token(db_user)
+    return auth.generate_token(db_user, time_otp_expire=0)
 
 
 def generate_qr(user_id: int, db: Session):
@@ -56,6 +56,26 @@ def generate_qr(user_id: int, db: Session):
         issuer_name="Test Kĩ Năng Backend",
         name=str(user_id)
     )
+
+
+def verify_otp(otp: int, user_id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail=f"User not found")
+
+    if not db_user.otp_secret:
+        raise HTTPException(status_code=400, detail=f"User has not scanned otp")
+
+    otp_secret = db_user.otp_secret
+
+    totp = pyotp.TOTP(otp_secret)
+
+    if not totp.verify(otp):
+        raise HTTPException(status_code=400, detail=f"OTP code is incorrect")
+    
+
+    return auth.generate_token(db_user)
+
 
 
 # def register(user: _schemas_user.UserRegister, db: Session):
