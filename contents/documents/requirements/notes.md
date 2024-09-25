@@ -129,6 +129,9 @@ Test đầu api trên postman: Làm lại sau
 {{url_api_v1}}/posts/{post_id}/comments/{comment_id}
 
 <!-- ! Postman -->
+<!-- Gọi API với Postman? -->
+Gọi {{baseUrl}} để lấy JWT 
+
 
 Thêm gửi email quên mật khẩu: Dùng mailhong
 Thêm đổi mật khẩu 
@@ -147,3 +150,18 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 `Chưa làm được`
 
 <!-- @Nhưng tất cả lỗi DB đều bị return -->
+
+
+
+
+
+Anh Đăng bảo:
+thêm  isEnableOTP: true, false
+thêm khôi phục quên OTP như github????
+
+
+ẢNh base64 nên làm 
+hàm phụ hình ảnh tạo hình ảnh?
+hàm phụ hoặc router2
+
+Tạo báo cáo

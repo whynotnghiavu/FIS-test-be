@@ -39,3 +39,11 @@ services:
       - JWT_EXPIRE_SECONDS=${JWT_EXPIRE_SECONDS}
       
       - OTP_EXPIRE_SECONDS=${OTP_EXPIRE_SECONDS}
+
+  # mailhog:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - 1025:1025
+  #     - 8025:8025
+  #   logging:
+  #     driver: none
