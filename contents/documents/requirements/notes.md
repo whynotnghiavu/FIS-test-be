@@ -1,26 +1,8 @@
-
-<!-- NodeJS MSA có post comment -->
-# Coding:
-
-Hàm routers = def (): thì để `):` bên dưới
-Xóa thì chỉ return `204 No Content`
-HTTP status=404, detail
-Quy trình chung: Tạo mới, Lấy tất cả, Lấy theo id, Xóa bỏ, Cập nhật
-Mã HTTP: 401 user
-
-# Công việc:
-
 <!-- Sử dụng FastAPI framework (python) -->
-
-<!-- !FastAPI -->
+<!-- Sử dụng method get/put/delete/post -->
 
 <!-- Sử dụng thư viện SQLAlchemy -->
 <!-- Xây dựng 3 bảng -->
-
-<!-- !SQLAlchemy -->
-<!-- !ORM -->
-
-<!-- Sử dụng method get/put/delete/post -->
 
 <!-- Xác thực và phân quyền: -->
 <!-- Thêm 1 bảng user -->
@@ -35,14 +17,10 @@ Mã HTTP: 401 user
 <!-- Admin all và CRUD thể loại -->
 <!-- Thêm sửa xóa (posts, comment) chỉ chủ nhân -->
 
-<!-- !jwt -->
-<!-- !json -->
-<!-- !hash -->
 
 <!-- Sử dụng docker -->
 <!-- Sử dụng mysql trong docker -->
 
-<!-- !docker -->
 
 <!-- Xử lý connect db với: -->
 <!-- retry_delay: Thời gian chờ thử lại -->
@@ -52,10 +30,8 @@ Mã HTTP: 401 user
 <!-- dùng field_validator -->
 <!-- và regex -->
 
-<!-- !regex -->
 
 <!-- Chuyển từ http sang https -->
-<!-- !SSL -->
 
 <!-- Dùng alembic quản lý SQL -->
 <!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
@@ -72,7 +48,6 @@ alembic history
 
 alembic revision --autogenerate -m "add description"
 
-<!-- !alembic -->
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
 <!-- trong docker nhưng db chưa khởi động -->
@@ -87,15 +62,7 @@ Phân quyền chỉ admin mới đăng ký tk mới
 <!-- @ Có dùng trực tiếp trong app/api -->
 <!-- https://gist.github.com/jsmsalt/26bf25844870d59eee17997727e3a631 -->
 
-Xử lý OTP: Dùng thư viện pyotp
-https://it-tools.tech/otp-generator
-
-<!-- !pyotp -->
-<!-- https://pyauth.github.io/pyotp -->
-<!-- !Học thuật toán HOTP, TOTP -->
-<!-- https://www.onelogin.com/learn/otp-totp-hotp -->
-
-<!-- https://pinonote.wordpress.com/2018/11/27/thuat-toan-hmac-based-one-time-password-algorithm-hotp-va-time-based-one-time-password-totp-trong-google-authenticator/ -->
+<!-- Xử lý OTP: Dùng thư viện pyotp -->
 
 Thêm logging logger
 xóa sau một giờ, 7 ngày 30 60 90.... env
@@ -122,13 +89,12 @@ Test đầu api trên postman: Làm lại sau
 {{url_api_v1}}/posts/{post_id}/comments
 {{url_api_v1}}/posts/{post_id}/comments/{comment_id}
 
-<!-- ! Postman -->
 <!-- Gọi API với Postman? -->
-Gọi {{baseUrl}} để lấy JWT 
 
+Gọi {{baseUrl}} để lấy JWT
 
 Thêm gửi email quên mật khẩu: Dùng mailhong
-Thêm đổi mật khẩu 
+Thêm đổi mật khẩu
 
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
@@ -145,16 +111,11 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 
 <!-- @Nhưng tất cả lỗi DB đều bị return -->
 
-
-
-
-
 Anh Đăng bảo:
-thêm  isEnableOTP: true, false
+thêm isEnableOTP: true, false
 thêm khôi phục quên OTP như github????
 
-
-ẢNh base64 nên làm 
+ẢNh base64 nên làm
 hàm phụ hình ảnh tạo hình ảnh?
 hàm phụ hoặc router2
 
