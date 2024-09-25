@@ -1,11 +1,5 @@
-<!-- thư viện pydantic -->
-<!-- thư viện datetime -->
-<!-- thư viện faker -->
-<!-- thư viện typing python -->
-<!-- Git -->
-<!-- NodeJS MSA có post comment -->
-<!-- mongodb -->
 
+<!-- NodeJS MSA có post comment -->
 # Coding:
 
 Hàm routers = def (): thì để `):` bên dưới
