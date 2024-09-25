@@ -46,7 +46,7 @@ alembic downgrade -1
 
 alembic history
 
-alembic revision --autogenerate -m "add description"
+alembic revision --autogenerate -m "LargeBinary otp_secret"
 
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
@@ -73,6 +73,17 @@ logger.error("This is an error message.")
 logger.warning("This is a warning message.")
 
 <!-- ################### -->
+isEnableOTP: true, false
+Lưu ảnh vào bảng user
+check lại
+phân quyền check otp
+
+đổi login như hướng dẫn
+<!-- ################### -->
+
+
+
+
 
 Test đầu api trên postman: Làm lại sau
 

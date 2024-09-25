@@ -23,7 +23,6 @@ from ..services.auth import validate_otp
 router = APIRouter(prefix="/users")
 
 
-
 @router.post('/register')
 def register(
     user: _schemas_user.UserRegister,
@@ -34,6 +33,7 @@ def register(
 
     return _services_user.register(user, db)
 
+
 @router.post('/login')
 def login(
     user: _schemas_user.UserLogin,
@@ -42,17 +42,28 @@ def login(
     return _services_user.login(user, db)
 
 
-@router.get("/generate-qr")
-def generate_qr(
+@router.get("/generate-qr-base64")
+def generate_qr_base64(
     user_id: Annotated[str, Depends(GetUserId())],
     db: Session = Depends(get_db)
 ):
-    otp_url = _services_user.generate_qr(user_id, db)
+    return _services_user.generate_qr(user_id, db)
 
-    qr_img = qrcode.make(otp_url)
-    # save image base 64 SQL
-    img_io = BytesIO()
-    qr_img.save(img_io, 'PNG')
+# @router.get("/generate-qr")
+# @router.get("/generate-qr")
+# @router.get("/generate-qr")
+
+
+@router.get("/generate-qr-image")
+def generate_qr_image(
+    user_id: Annotated[str, Depends(GetUserId())],
+    db: Session = Depends(get_db)
+):
+    import base64
+    qr_base64 = _services_user.generate_qr(user_id, db)
+
+    img_data = base64.b64decode(qr_base64)
+    img_io = BytesIO(img_data)
     img_io.seek(0)
 
     return StreamingResponse(img_io, media_type="image/png")

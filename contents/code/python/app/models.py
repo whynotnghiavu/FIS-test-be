@@ -62,7 +62,9 @@ class User(Base):
     email = _sqlalchemy.Column(_sqlalchemy.String(255), unique=True, nullable=False, index=True)
     password = _sqlalchemy.Column(_sqlalchemy.String(255), nullable=False)
     role = _sqlalchemy.Column(_sqlalchemy.Enum(Role))
-    otp_secret = _sqlalchemy.Column(_sqlalchemy.String(255), nullable=True)
+
+    otp_secret = _sqlalchemy.Column(_sqlalchemy.LargeBinary, nullable=True)
+    otp_qr_code = _sqlalchemy.Column(_sqlalchemy.Text, nullable=True)
 
     posts = relationship("Post", back_populates="user", cascade="all, delete-orphan")
     comments = relationship("Comment", back_populates="user", cascade="all, delete-orphan")

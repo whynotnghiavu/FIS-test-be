@@ -4,7 +4,7 @@ faker
 typing
 Git
 mongodb
-
+cryptography
 <!-- NodeJS MSA có post comment -->
 <!-- !FastAPI -->
 

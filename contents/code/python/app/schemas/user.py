@@ -37,7 +37,16 @@ class UserRegister(UserBase):
 
 
 class UserLogin(UserBase):
-    pass
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "email": "admin@gmail.com",
+                    "password": "admin@A8"
+                }
+            ]
+        }
+    }
 
 
 class User(UserBase):
