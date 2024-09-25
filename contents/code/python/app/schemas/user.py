@@ -58,6 +58,11 @@ class User(UserBase):
         from_attributes = True
 
 
+
+
+
+
+
 class JWTUser(User):
     user_id: int
     role: Role

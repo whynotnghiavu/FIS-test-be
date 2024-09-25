@@ -46,7 +46,7 @@ alembic downgrade -1
 
 alembic history
 
-alembic revision --autogenerate -m "LargeBinary otp_secret"
+alembic revision --autogenerate -m "add is_enable_otp"
 
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
@@ -74,11 +74,14 @@ logger.warning("This is a warning message.")
 
 <!-- ################### -->
 isEnableOTP: true, false
-Lưu ảnh vào bảng user
-check lại
+
+<!-- Lưu ảnh vào bảng user -->
+<!-- check lại -->
+
 phân quyền check otp
 
-đổi login như hướng dẫn
+<!-- đổi login như hướng dẫn -->
+https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify-the-passwords
 <!-- ################### -->
 
 

@@ -20,9 +20,10 @@ app = FastAPI(
 
 
 app.include_router(user.router, prefix=f"/api/v1", tags=["users"])
-app.include_router(category.router, prefix=f"/api/v1", tags=["categories"])
-app.include_router(post.router, prefix=f"/api/v1", tags=["posts"])
-app.include_router(comment.router, prefix=f"/api/v1", tags=["comments"])
+# check otp
+# app.include_router(category.router, prefix=f"/api/v1", tags=["categories"])
+# app.include_router(post.router, prefix=f"/api/v1", tags=["posts"])
+# app.include_router(comment.router, prefix=f"/api/v1", tags=["comments"])
 
 
 @app.get("/")

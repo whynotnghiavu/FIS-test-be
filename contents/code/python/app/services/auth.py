@@ -1,7 +1,8 @@
 import os
 import jwt
-from fastapi.security import HTTPBearer
-from fastapi import Depends, HTTPException,status
+
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import Depends, HTTPException, status
 from datetime import datetime, timedelta
 from pydantic import ValidationError
 
@@ -17,9 +18,7 @@ JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", 60 * 60 * 24 * 3))
 OTP_EXPIRE_SECONDS = 60
 
 
-reusable_oauth2 = HTTPBearer(
-    scheme_name='Authorization'
-)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/users/login")
 
 
 def generate_token(user: _schemas_user.User, time_otp_expire=OTP_EXPIRE_SECONDS):
@@ -35,12 +34,15 @@ def generate_token(user: _schemas_user.User, time_otp_expire=OTP_EXPIRE_SECONDS)
 
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_SECURITY_ALGORITHM)
 
-    return {"token": encoded_jwt}
+    return {
+        "access_token": encoded_jwt,
+        "token_type": "bearer"
+    }
 
 
-def validate_token(token=Depends(reusable_oauth2)) -> str:
+def validate_token(token=Depends(oauth2_scheme)) -> str:
     try:
-        payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
 
         jwt_expire = datetime.fromtimestamp(payload.get('jwt_expire'))
         if jwt_expire < datetime.now():
@@ -51,13 +53,16 @@ def validate_token(token=Depends(reusable_oauth2)) -> str:
             "role": payload.get('role'),
         }
 
-    except (jwt.PyJWTError, ValidationError):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials")
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Could not validate credentials"
+        )
 
 
-def validate_otp(token=Depends(reusable_oauth2)) -> str:
+def validate_otp(token=Depends(oauth2_scheme)) -> str:
     try:
-        payload = jwt.decode(token.credentials, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_SECURITY_ALGORITHM])
 
         otp_expire = datetime.fromtimestamp(payload.get('otp_expire'))
         if otp_expire < datetime.now():

@@ -10,11 +10,12 @@ from ..logger import logger
 
 
 def create_superuser():
-    logger.info("🐍 File: seeders/create_superuser.py | Line: 10 | undefined ~ create_superuser", create_superuser)
     user = _schemas_user.UserRegister(
         email=os.getenv("EMAIL_ADMIN_DEFAULT", "admin@gmail.com"),
         password=os.getenv("PASSWORD_ADMIN_DEFAULT", "admin@A8"),
         role=Role.ADMIN
     )
+    
+    print("🐍 File: seeders/create_superuser.py | Line: 18 | create_superuser ~ user",user)
 
     return _services_user.create_superuser(user, next(get_db()))
