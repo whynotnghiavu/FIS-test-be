@@ -46,7 +46,7 @@ alembic downgrade -1
 
 alembic history
 
-alembic revision --autogenerate -m "add is_enable_otp"
+alembic revision --autogenerate -m "add otp_recovery"
 
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
@@ -72,7 +72,6 @@ logger.info("This is an info message.")
 logger.error("This is an error message.")
 logger.warning("This is a warning message.")
 
-<!-- ################### -->
 isEnableOTP: true, false
 
 <!-- Lưu ảnh vào bảng user -->
@@ -82,33 +81,24 @@ phân quyền check otp
 
 <!-- đổi login như hướng dẫn -->
 https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify-the-passwords
+
+<!-- @Khi đăng ký và xác thực otp thì làm sao để tự động gắn lại JWT? -->
 <!-- ################### -->
 
-<!-- @Khi đăng ký và xác thực otp thì làm sao để auto gắn JWT? -->
+thêm khôi phục quên OTP như github????
+otp-recovery
+<!-- ################### -->
 
 
-
-Test đầu api trên postman: Làm lại sau
-
-{{url_api_v1}}/users/login
-{{url_api_v1}}/users/generate-qr
-{{url_api_v1}}/users/verify-otp
-
-{{url_api_v1}}/categories
-{{url_api_v1}}/categories/{category_id}
-
-{{url_api_v1}}/posts
-{{url_api_v1}}/posts/{post_id}
-
-{{url_api_v1}}/posts/{post_id}/comments
-{{url_api_v1}}/posts/{post_id}/comments/{comment_id}
+ 
 
 <!-- Gọi API với Postman? -->
 
-Gọi {{baseUrl}} để lấy JWT
+<!-- @Gọi {{baseUrl}} để lấy JWT -->
 
-Thêm gửi email quên mật khẩu: Dùng mailhong
-Thêm đổi mật khẩu
+<!-- Thêm đổi mật khẩu -->
+<!-- Thêm gửi email quên mật khẩu: Dùng mailhong -->
+
 
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
@@ -125,12 +115,15 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 
 <!-- @Nhưng tất cả lỗi DB đều bị return -->
 
-Anh Đăng bảo:
-thêm isEnableOTP: true, false
-thêm khôi phục quên OTP như github????
+<!-- Anh Đăng bảo: -->
+<!-- thêm isEnableOTP: true, false -->
+<!-- thêm khôi phục quên OTP như github???? -->
 
-ẢNh base64 nên làm
-hàm phụ hình ảnh tạo hình ảnh?
-hàm phụ hoặc router2
 
-Tạo báo cáo
+
+
+<!-- ẢNh base64 nên làm -->
+<!-- hàm phụ hình ảnh tạo hình ảnh? -->
+<!-- hàm phụ hoặc router2 -->
+
+<!-- Tạo báo cáo -->

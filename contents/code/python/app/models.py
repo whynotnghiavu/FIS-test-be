@@ -70,6 +70,7 @@ class User(Base):
     is_enable_otp = _sqlalchemy.Column(_sqlalchemy.Boolean, default=False)
     otp_secret = _sqlalchemy.Column(_sqlalchemy.LargeBinary, nullable=True)
     otp_qr_code = _sqlalchemy.Column(_sqlalchemy.Text, nullable=True)
+    otp_recovery = _sqlalchemy.Column(_sqlalchemy.JSON, nullable=True)
 
     posts = relationship("Post", back_populates="user", cascade="all, delete-orphan")
     comments = relationship("Comment", back_populates="user", cascade="all, delete-orphan")

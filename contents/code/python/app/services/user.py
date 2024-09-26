@@ -10,6 +10,7 @@ from . import cryptography
 
 
 from . import auth
+from .generate_random_string import generate_random_string
 
 
 import qrcode
@@ -137,6 +138,49 @@ def verify_otp(otp: int, user_id: int, db: Session):
     db.refresh(db_user)
 
     return auth.generate_token(db_user)
+
+
+def save_recovery_otp(user_id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User not found"
+        )
+
+    otp_list = []
+    for _ in range(6):
+        otp_list.append(generate_random_string())
+
+    db_user.otp_recovery = otp_list
+    db.commit()
+    db.refresh(db_user)
+
+    return otp_list
+
+
+def verify_recovery_otp(code: str, user_id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User not found"
+        )
+
+    if code not in db_user.otp_recovery:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Code OTP recovery is incorrect"
+        )
+
+    db_user.is_enable_otp = False
+    db.commit()
+    db.refresh(db_user)
+
+    otp_qr_code = generate_qr(db_user.id, db)
+    return {
+        "otp_qr_code": otp_qr_code,
+    }
 
 
 def register(user: _schemas_user.UserRegister, db: Session):

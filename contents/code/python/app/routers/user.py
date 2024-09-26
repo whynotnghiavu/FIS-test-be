@@ -20,6 +20,16 @@ from ..services.auth import validate_otp
 router = APIRouter(prefix="/users")
 
 
+@router.post('/register')
+def register(
+    user: _schemas_user.UserRegister,
+    _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    _otp: Annotated[bool, Depends(validate_otp)],
+    db: Session = Depends(get_db)
+):
+    return _services_user.register(user, db)
+
+
 @router.post('/login')
 def login(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
@@ -36,7 +46,7 @@ def login(
 def current_user_id(
     user_id: Annotated[str, Depends(GetUserId())],
 ):
-    return user_id
+    return {"user_id": user_id}
 
 
 @router.get("/demo-frontend-qr")
@@ -56,11 +66,19 @@ def verify_otp(
     return _services_user.verify_otp(otp, user_id, db)
 
 
-@router.post('/register')
-def register(
-    user: _schemas_user.UserRegister,
-    _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+@router.get("/save-recovery-otp")
+def save_recovery_otp(
+    user_id: Annotated[str, Depends(GetUserId())],
     _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
-    return _services_user.register(user, db)
+    return _services_user.save_recovery_otp(user_id, db)
+
+
+@router.post("/verify-recovery-otp")
+def verify_recovery_otp(
+    code: str,
+    user_id: Annotated[str, Depends(GetUserId())],
+    db: Session = Depends(get_db)
+):
+    return _services_user.verify_recovery_otp(code, user_id, db)
