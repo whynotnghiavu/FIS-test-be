@@ -17,10 +17,8 @@
 <!-- Admin all và CRUD thể loại -->
 <!-- Thêm sửa xóa (posts, comment) chỉ chủ nhân -->
 
-
 <!-- Sử dụng docker -->
 <!-- Sử dụng mysql trong docker -->
-
 
 <!-- Xử lý connect db với: -->
 <!-- retry_delay: Thời gian chờ thử lại -->
@@ -29,7 +27,6 @@
 <!-- Thêm validate: -->
 <!-- dùng field_validator -->
 <!-- và regex -->
-
 
 <!-- Chuyển từ http sang https -->
 
@@ -80,6 +77,7 @@ isEnableOTP: true, false
 phân quyền check otp
 
 <!-- đổi login như hướng dẫn -->
+
 https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify-the-passwords
 
 <!-- @Khi đăng ký và xác thực otp thì làm sao để tự động gắn lại JWT? -->
@@ -87,18 +85,12 @@ https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify
 thêm khôi phục quên OTP như github????
 otp-recovery
 
-
+<!-- # Thay đổi  ảnh khi quên OTP (mất điện thoại) -->
 
 <!-- ################### -->
-        # Thay đổi  ảnh
-
 Tạo FE
 
-
 <!-- ################### -->
-
-
- 
 
 <!-- Gọi API với Postman? -->
 
@@ -106,7 +98,6 @@ Tạo FE
 
 <!-- Thêm đổi mật khẩu -->
 <!-- Thêm gửi email quên mật khẩu: Dùng mailhong -->
-
 
 <!-- Thêm gợi ý DTO có thể dùng fAker -->
 
@@ -127,12 +118,10 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 <!-- thêm isEnableOTP: true, false -->
 <!-- thêm khôi phục quên OTP như github???? -->
 
-
-
-
 <!-- ẢNh base64 nên làm -->
 <!-- hàm phụ hình ảnh tạo hình ảnh? -->
 <!-- hàm phụ hoặc router2 -->
 
 <!-- Tạo báo cáo -->
+
 refresh_token

@@ -173,6 +173,7 @@ def verify_recovery_otp(code: str, user_id: int, db: Session):
             detail=f"Code OTP recovery is incorrect"
         )
 
+    db_user.otp_secret = False
     db_user.is_enable_otp = False
     db.commit()
     db.refresh(db_user)
