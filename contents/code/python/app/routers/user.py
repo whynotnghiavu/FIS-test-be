@@ -1,6 +1,5 @@
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from ..logger import logger
-from fastapi import APIRouter, Depends, Response
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..database.get_db import get_db
 from typing import Annotated

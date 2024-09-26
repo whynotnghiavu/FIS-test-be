@@ -1,6 +1,6 @@
 import pyotp
 from ..logger import logger
-from fastapi import HTTPException, status, Response
+from fastapi import HTTPException, status
 from fastapi.responses import StreamingResponse
 
 from sqlalchemy.orm import Session

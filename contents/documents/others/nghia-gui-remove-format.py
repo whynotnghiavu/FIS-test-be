@@ -35,7 +35,7 @@ def format(directory):
 
 if __name__ == "__main__":
     paths = [
-         r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\VideoWatch",
+           r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python",
     ]
     for path in paths:
         format(path)

@@ -1,4 +1,4 @@
-from fastapi import HTTPException,status
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from ..schemas import post as _schemas_post
@@ -44,9 +44,8 @@ def update(post_id: int, post: _schemas_post.PostUpdate, user_id: int, db: Sessi
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category not found")
 
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
-    if    not db_post  :
+    if not db_post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
-
 
     if db_post.user_id != user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the post")
@@ -64,9 +63,8 @@ def remove(post_id: int, user_id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User not found")
 
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
-    if    not db_post  :
+    if not db_post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
-
 
     if db_post.user_id != user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"User is not the owner of the post")
