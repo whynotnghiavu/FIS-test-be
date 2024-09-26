@@ -47,7 +47,7 @@ services:
   #     - 8025:8025
   #   logging:
   #     driver: none
-  web:
+  gui:
     build: "../gui"
     ports:
       - "3000:80"
