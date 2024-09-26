@@ -1,10 +1,6 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
-
-from .logger import setup_logger
-logger = setup_logger(__name__)
-
-# from .logger import logger
 
 
 # from .database.create_db import create_db
@@ -16,20 +12,38 @@ from .routers import user
 # from .routers import comment
 
 
-# logger.info("Server is starting...")
-# create_db()
-# create_superuser()
+from .logger import setup_logger
+logger = setup_logger(__name__)
+
+
+def create_db():
+    logger.info("create_db")
+def create_superuser():
+    logger.info("create_superuser")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Code to run at application startup
+    logger.info("Server is starting...")
+    create_db()
+    create_superuser()
+    yield
+    # Code to run at application shutdown
+    print("Application shutdown")
+
 
 
 app = FastAPI(
-    title='Test Kĩ Năng Backend'
+    title='Test Kĩ Năng Backend',
+    lifespan=lifespan
 )
 
 
+
+# Kiến thức về CORS
 origins = [
     "*",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

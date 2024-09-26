@@ -10,11 +10,14 @@ router = APIRouter(prefix="/users")
 @router.post('/register')
 def register(
 ):
+    # Chức năng: Đăng ký
+    # CHỉ có Admin mới có thể đăng ký
     logger.info("register")
     return "register"
 
 @router.post('/login')
 def login(
 ):
+    # Chức năng: Đăng nhập
     logger.info("login")
     return "login"

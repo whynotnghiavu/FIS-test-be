@@ -1,6 +1,6 @@
 import logging
 
-
+# Kiến thức về LOG
 def setup_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
