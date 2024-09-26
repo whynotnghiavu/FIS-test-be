@@ -84,7 +84,7 @@ phân quyền check otp
 https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify-the-passwords
 <!-- ################### -->
 
-
+<!-- @Khi đăng ký và xác thực otp thì làm sao để auto gắn JWT? -->
 
 
 

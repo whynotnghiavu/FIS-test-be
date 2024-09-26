@@ -26,7 +26,7 @@ if __name__ == "__main__":
     folder_path = r"C:\Users\vvn20206205\Downloads\Nghia\Git\whynotnghiavu\FIS-test-be\contents\code\python"
 
     keywords = [
-        "status_code",
+        "123",
 
 
     ]

@@ -32,11 +32,10 @@ def generate_token(user: _schemas_user.User, time_otp_expire=OTP_EXPIRE_SECONDS)
         "otp_expire": int(otp_expire.timestamp()),
     }
 
-    encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_SECURITY_ALGORITHM)
+    token = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_SECURITY_ALGORITHM)
 
     return {
-        "access_token": encoded_jwt,
-        "token_type": "bearer"
+        "access_token": token,
     }
 
 

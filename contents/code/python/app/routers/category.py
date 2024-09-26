@@ -42,6 +42,7 @@ def update_category(
     category_id: int,
     category: _schemas_category.CategoryUpdate,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
     return _services_category.update(category_id, category, db)
@@ -51,6 +52,7 @@ def update_category(
 def delete_category(
     category_id: int,
     _: Annotated[bool, Depends(RoleChecker(allowed_roles=[Role.ADMIN]))],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
     return _services_category.remove(category_id, db)

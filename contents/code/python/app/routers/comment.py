@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException,status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from typing import Annotated
@@ -12,6 +12,7 @@ from ..schemas import comment as _schemas_comment
 from ..services import comment as _services_comment
 
 from ..services.get_user_id import GetUserId
+from ..services.auth import validate_otp
 
 
 router = APIRouter(prefix="/posts/{post_id}/comments")
@@ -22,6 +23,7 @@ def create_comment(
     post_id: int,
     comment: _schemas_comment.CommentCreate,
     user_id: Annotated[str, Depends(GetUserId())],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
     return _services_comment.create(post_id, comment, user_id, db)
@@ -42,6 +44,7 @@ def update_comment(
     comment_id: int,
     comment: _schemas_comment.CommentUpdate,
     user_id: Annotated[str, Depends(GetUserId())],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
     return _services_comment.update(comment_id, comment, user_id, db)
@@ -51,6 +54,7 @@ def update_comment(
 def delete_comment(
     comment_id: int,
     user_id: Annotated[str, Depends(GetUserId())],
+    _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
 

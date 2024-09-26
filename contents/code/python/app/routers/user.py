@@ -1,19 +1,15 @@
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from ..logger import logger
 from fastapi import APIRouter, Depends, Response
 from sqlalchemy.orm import Session
 from ..database.get_db import get_db
-
 from typing import Annotated
 
+
 from ..schemas import user as _schemas_user
-
 from ..services import user as _services_user
+
 from ..services.get_user_id import GetUserId
-
-
-from fastapi.responses import StreamingResponse
-import qrcode
-from io import BytesIO
 
 
 from ..models import Role
@@ -67,5 +63,4 @@ def register(
     _otp: Annotated[bool, Depends(validate_otp)],
     db: Session = Depends(get_db)
 ):
-
     return _services_user.register(user, db)

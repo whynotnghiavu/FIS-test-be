@@ -37,16 +37,17 @@ class UserRegister(UserBase):
 
 
 class UserLogin(UserBase):
-    model_config = {
-        "json_schema_extra": {
-            "examples": [
-                {
-                    "email": "admin@gmail.com",
-                    "password": "admin@A8"
-                }
-            ]
-        }
-    }
+    # model_config = {
+    #     "json_schema_extra": {
+    #         "examples": [
+    #             {
+    #                 "email": "admin@gmail.com",
+    #                 "password": "admin@A8"
+    #             }
+    #         ]
+    #     }
+    # }
+    pass
 
 
 class User(UserBase):
@@ -56,11 +57,6 @@ class User(UserBase):
     class Config:
         # orm_mode = True
         from_attributes = True
-
-
-
-
-
 
 
 class JWTUser(User):

@@ -1,13 +1,12 @@
-from fastapi.responses import JSONResponse
 import pyotp
+from ..logger import logger
 from fastapi import HTTPException, status, Response
 from fastapi.responses import StreamingResponse
+
 from sqlalchemy.orm import Session
-
-from ..schemas import user as _schemas_user
-
-
 from .. import models
+from ..schemas import user as _schemas_user
+from . import cryptography
 
 
 from . import auth
@@ -16,10 +15,6 @@ from . import auth
 import qrcode
 import base64
 from io import BytesIO
-
-
-from . import cryptography
-from ..logger import logger
 
 
 def create_superuser(user: _schemas_user.UserRegister, db: Session):
@@ -49,15 +44,15 @@ def login(user: _schemas_user.UserLogin, db: Session):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    jwt_token = auth.generate_token(db_user, time_otp_expire=0)
-
     if not db_user.is_enable_otp:
         otp_qr_code = generate_qr(db_user.id, db)
+        jwt_token = auth.generate_token(db_user, time_otp_expire=0)
         return {
             "otp_qr_code": otp_qr_code,
             "access_token": jwt_token.get('access_token'),
-            "token_type": jwt_token.get('token_type'),
         }
+
+    jwt_token = auth.generate_token(db_user)
     return jwt_token
 
 
@@ -71,22 +66,27 @@ def generate_qr(user_id: int, db: Session):
 
     if not db_user.otp_secret:
         otp_secret = pyotp.random_base32()
-        print("🐍 File: services/user.py | Line: 73 | generate_qr ~ otp_secret", otp_secret)
-        otp_secret = cryptography.encrypt(otp_secret)
-        print("🐍 File: services/user.py | Line: 75 | generate_qr ~ otp_secret", otp_secret)
-        db_user.otp_secret = otp_secret
+        logger.debug(otp_secret)
+        db_user.otp_secret = cryptography.encrypt(otp_secret)
+        logger.debug(otp_secret)
 
-    totp = pyotp.TOTP(db_user.otp_secret)
+    otp_secret = db_user.otp_secret
+    logger.debug(otp_secret)
+    otp_secret = cryptography.decrypt(otp_secret)
+    logger.debug(otp_secret)
+
+    totp = pyotp.TOTP(otp_secret)
     provisioning_uri = totp.provisioning_uri(
         issuer_name="Test Kĩ Năng Backend",
         name=str(user_id)
     )
-    print("🐍 File: services/user.py | Line: 84 | generate_qr ~ provisioning_uri",provisioning_uri)
+    logger.debug(provisioning_uri)
 
     qr_img = qrcode.make(provisioning_uri)
     buffered = BytesIO()
     qr_img.save(buffered, "PNG")
     qr_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
     db_user.otp_qr_code = qr_base64
     db.commit()
     db.refresh(db_user)
@@ -118,12 +118,13 @@ def verify_otp(otp: int, user_id: int, db: Session):
         )
 
     otp_secret = db_user.otp_secret
-    print("🐍 File: services/user.py | Line: 119 | verify_otp ~ otp_secret", otp_secret)
+    logger.debug(otp_secret)
     otp_secret = cryptography.decrypt(otp_secret)
-    print("🐍 File: services/user.py | Line: 121 | verify_otp ~ otp_secret", otp_secret)
+    logger.debug(otp_secret)
+
     totp = pyotp.TOTP(otp_secret)
-    print("🐍 File: services/user.py | Line: 105 | undefined ~ otp", otp)
-    print("🐍 File: services/user.py | Line: 124 | verify_otp ~ totp.now()", totp.now())
+    logger.debug(otp)
+    logger.debug(totp.now())
 
     if not totp.verify(otp):
         raise HTTPException(
@@ -150,4 +151,3 @@ def register(user: _schemas_user.UserRegister, db: Session):
     db.refresh(new_user)
 
     return auth.generate_token(new_user, time_otp_expire=0)
-# Tạo OTP như đăng nhập
