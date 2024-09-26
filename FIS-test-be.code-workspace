@@ -12,6 +12,9 @@
     {
       "name": "python",
       "path": "contents/code/python"
+    },
+    {
+      "path": "contents/code/gui"
     }
   ],
   "settings": {}
