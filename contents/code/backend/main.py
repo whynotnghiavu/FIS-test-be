@@ -1,17 +1,15 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import os
+import uvicorn
 
-app = FastAPI()
 
-# Cấu hình CORS để React có thể kết nối
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/api")
-def read_root():
-    return {"message": "Hello from FastAPI"}
+if __name__ == "__main__":
+    uvicorn.run(
+        "app.api:app",
+        host="0.0.0.0",
+        port=int(os.getenv("SERVER_PORT", 8000)),
+        reload=True,
+        # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem
+        # Tìm hiểu thêm về SSL
+        ssl_keyfile="./ssl/key.pem",
+        ssl_certfile="./ssl/cert.pem",
+    )
