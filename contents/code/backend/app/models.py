@@ -62,17 +62,9 @@ class User(Base):
 
     id = _sqlalchemy.Column(_sqlalchemy.Integer, primary_key=True, index=True)
 
-    username = _sqlalchemy.Column(_sqlalchemy.String(255), unique=True, index=True)
-    password = _sqlalchemy.Column(_sqlalchemy.String(255), nullable=False)
-
-    name = _sqlalchemy.Column(_sqlalchemy.String(255), index=True)
-
     email = _sqlalchemy.Column(_sqlalchemy.String(255), unique=True, nullable=False, index=True)
-    phone = _sqlalchemy.Column(_sqlalchemy.String(255), unique=True, nullable=False, index=True)
-
+    password = _sqlalchemy.Column(_sqlalchemy.String(255), nullable=False)
     role = _sqlalchemy.Column(_sqlalchemy.Enum(Role))
-
-    created_at = _sqlalchemy.Column(_sqlalchemy.DateTime(timezone=True), default=datetime.now())
 
     is_enable_otp = _sqlalchemy.Column(_sqlalchemy.Boolean, default=False)
     otp_secret = _sqlalchemy.Column(_sqlalchemy.LargeBinary, nullable=True)

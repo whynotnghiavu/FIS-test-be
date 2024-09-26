@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 from .database.create_db import create_db
-# from .seeders.create_superuser import create_superuser
+from .seeders.create_superuser import create_superuser
 
 from .routers import user
 # from .routers import category
@@ -17,9 +17,6 @@ logger = setup_logger(__name__)
 
  
 
-
-def create_superuser():
-    logger.info("create_superuser")
 
 
 @asynccontextmanager
