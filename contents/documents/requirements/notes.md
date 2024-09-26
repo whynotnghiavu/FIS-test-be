@@ -1,3 +1,24 @@
+<!-- Các chức năng: -->
+
+Đăng nhập
+Đăng ký
+Đăng xuất
+
+Xác minh OTP
+Thể loại, Bài viết, Bình luận
+<!-- refresh token? -->
+
+Quên mật khẩu
+
+<!-- Lý thuyết: -->
+
+JWT token
+Mail Mailhong
+Back end + Font end
+
+
+
+
 <!-- Sử dụng FastAPI framework (python) -->
 <!-- Sử dụng method get/put/delete/post -->
 
@@ -93,6 +114,7 @@ otp-recovery
 npx create-react-app gui
 cd gui
 npm start
+
 <!-- !Lỗi chưa OTP tạo thể loại thì bị báo lỗi JWTT?! -->
 <!-- ################### -->
 
