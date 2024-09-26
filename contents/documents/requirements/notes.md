@@ -87,9 +87,10 @@ otp-recovery
 
 <!-- # Thay đổi  ảnh khi quên OTP (mất điện thoại) -->
 
+<!-- !Tạo FE -->
 <!-- ################### -->
-Tạo FE
-
+npx create-react-app gui
+npm start
 <!-- ################### -->
 
 <!-- Gọi API với Postman? -->
