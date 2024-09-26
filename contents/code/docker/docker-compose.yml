@@ -49,7 +49,9 @@ services:
   #     driver: none
   gui:
     build: "../gui"
-    ports:
-      - "3000:80"
+    ports: 
+      - "3000:3000"
     volumes:
-      - "../gui:/var/www/html"
+      - "../gui:/app"
+    environment:
+      - CHOKIDAR_USEPOLLING=true

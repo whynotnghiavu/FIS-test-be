@@ -91,6 +91,7 @@ otp-recovery
 <!-- ################### -->
 
 npx create-react-app gui
+cd gui
 npm start
 <!-- !Lỗi chưa OTP tạo thể loại thì bị báo lỗi JWTT?! -->
 <!-- ################### -->
