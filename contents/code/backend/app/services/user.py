@@ -1,21 +1,31 @@
-# import pyotp
-# from fastapi import HTTPException, status
-# from fastapi.responses import StreamingResponse
+from fastapi import HTTPException, status
 
+from fastapi.responses import StreamingResponse
 
-# from . import auth
-# from .generate_random_string import generate_random_string
-
-
-# import qrcode
-# import base64
-# from io import BytesIO
 
 
 from sqlalchemy.orm import Session
 from ..schemas import user as _schemas_user
 from .. import models
+
 from . import cryptography
+
+from . import auth
+
+
+import pyotp
+
+
+
+
+import qrcode
+
+import base64
+
+from io import BytesIO
+
+# from .generate_random_string import generate_random_string
+
 
 
 from ..logger import setup_logger
@@ -33,70 +43,88 @@ def create_superuser(user: _schemas_user.UserRegister, db: Session):
         db.refresh(new_user)
 
 
-# def login(user: _schemas_user.UserLogin, db: Session):
-#     db_user = db.query(models.User).filter(models.User.email == user.email).first()
-#     if not db_user:
-#         raise HTTPException(
-#             status_code=status.HTTP_401_UNAUTHORIZED,
-#             detail="Incorrect login information",
-#             headers={"WWW-Authenticate": "Bearer"},
-#         )
+def register(user: _schemas_user.UserRegister, db: Session):
+    if user.password != user.confirm_password:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Passwords do not match"
+        )
 
-#     if not cryptography.verify_password(user.password, db_user.password):
-#         raise HTTPException(
-#             status_code=status.HTTP_401_UNAUTHORIZED,
-#             detail="Incorrect login information",
-#             headers={"WWW-Authenticate": "Bearer"},
-#         )
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if db_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Email '{user.email}' already exists."
+        )
 
-#     if not db_user.is_enable_otp:
-#         otp_qr_code = generate_qr(db_user.id, db)
-#         jwt_token = auth.generate_token(db_user, time_otp_expire=0)
-#         return {
-#             "otp_qr_code": otp_qr_code,
-#             "access_token": jwt_token.get('access_token'),
-#         }
+    user.password = cryptography.hash_password(user.password)
+    new_user = models.User(**user.model_dump())
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
 
-#     jwt_token = auth.generate_token(db_user)
-#     return jwt_token
+    return auth.generate_token(new_user, time_otp_expire=0)
 
 
-# def generate_qr(user_id: int, db: Session):
-#     db_user = db.query(models.User).filter(models.User.id == user_id).first()
-#     if not db_user:
-#         raise HTTPException(
-#             status_code=status.HTTP_404_NOT_FOUND,
-#             detail=f"User not found"
-#         )
+def login(user: _schemas_user.UserLogin, db: Session):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect login information",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
-#     if not db_user.otp_secret:
-#         otp_secret = pyotp.random_base32()
-#         logger.debug(otp_secret)
-#         db_user.otp_secret = cryptography.encrypt(otp_secret)
-#         logger.debug(otp_secret)
+    if not cryptography.verify_password(user.password, db_user.password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect login information",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
-#     otp_secret = db_user.otp_secret
-#     logger.debug(otp_secret)
-#     otp_secret = cryptography.decrypt(otp_secret)
-#     logger.debug(otp_secret)
+    if not db_user.is_enable_otp:
+        otp_qr_code = generate_qr(db_user.id, db)
+        jwt_token = auth.generate_token(db_user, time_otp_expire=0)
+        return {
+            "otp_qr_code": otp_qr_code,
+            "access_token": jwt_token.get('access_token'),
+        }
 
-#     totp = pyotp.TOTP(otp_secret)
-#     provisioning_uri = totp.provisioning_uri(
-#         issuer_name="Test Kĩ Năng Backend",
-#         name=str(user_id)
-#     )
-#     logger.debug(provisioning_uri)
+    jwt_token = auth.generate_token(db_user)
+    return jwt_token
 
-#     qr_img = qrcode.make(provisioning_uri)
-#     buffered = BytesIO()
-#     qr_img.save(buffered, "PNG")
-#     qr_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
-#     db_user.otp_qr_code = qr_base64
-#     db.commit()
-#     db.refresh(db_user)
+def generate_qr(user_id: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User not found"
+        )
 
-#     return qr_base64
+    if not db_user.otp_secret:
+        otp_secret = pyotp.random_base32()
+        db_user.otp_secret = cryptography.encrypt(otp_secret)
+
+    otp_secret = db_user.otp_secret
+    otp_secret = cryptography.decrypt(otp_secret)
+
+    totp = pyotp.TOTP(otp_secret)
+    provisioning_uri = totp.provisioning_uri(
+        issuer_name="Test Kĩ Năng Backend",
+        name=str(user_id)
+    )
+
+    qr_img = qrcode.make(provisioning_uri)
+    buffered = BytesIO()
+    qr_img.save(buffered, "PNG")
+    qr_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+    db_user.otp_qr_code = qr_base64
+    db.commit()
+    db.refresh(db_user)
+
+    return qr_base64
 
 
 # def demo_frontend_qr(user_id: int, db: Session):
@@ -188,17 +216,3 @@ def create_superuser(user: _schemas_user.UserRegister, db: Session):
 
 
 #     }
-
-
-# def register(user: _schemas_user.UserRegister, db: Session):
-#     db_user = db.query(models.User).filter(models.User.email == user.email).first()
-#     if db_user:
-#         raise HTTPException(status_code=400, detail=f"Email '{user.email}' already exists.")
-
-#     user.password = cryptography.hash_password(user.password)
-#     new_user = models.User(**user.model_dump())
-#     db.add(new_user)
-#     db.commit()
-#     db.refresh(new_user)
-
-#     return auth.generate_token(new_user, time_otp_expire=0)

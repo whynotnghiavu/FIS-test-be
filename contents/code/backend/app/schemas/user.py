@@ -33,6 +33,7 @@ class UserBase(BaseModel):
 
 
 class UserRegister(UserBase):
+    password_confirm: str
     role: Role
 
 
