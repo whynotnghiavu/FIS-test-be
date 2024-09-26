@@ -180,6 +180,8 @@ def verify_recovery_otp(code: str, user_id: int, db: Session):
     otp_qr_code = generate_qr(db_user.id, db)
     return {
         "otp_qr_code": otp_qr_code,
+
+
     }
 
 

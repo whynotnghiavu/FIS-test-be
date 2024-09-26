@@ -83,10 +83,18 @@ phân quyền check otp
 https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/?h=jwt#hash-and-verify-the-passwords
 
 <!-- @Khi đăng ký và xác thực otp thì làm sao để tự động gắn lại JWT? -->
-<!-- ################### -->
 
 thêm khôi phục quên OTP như github????
 otp-recovery
+
+
+
+<!-- ################### -->
+        # Thay đổi  ảnh
+
+Tạo FE
+
+
 <!-- ################### -->
 
 
@@ -127,3 +135,4 @@ Truy vấn bị lỗi do server: dùng ExceptionMiddleware return
 <!-- hàm phụ hoặc router2 -->
 
 <!-- Tạo báo cáo -->
+refresh_token

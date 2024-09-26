@@ -14,8 +14,9 @@ JWT_SECURITY_ALGORITHM = os.getenv("JWT_SECURITY_ALGORITHM", "HS256")
 JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "SECRET_KEY")
 JWT_EXPIRE_SECONDS = int(os.getenv("JWT_EXPIRE_SECONDS", 60 * 60 * 24 * 3))
 # OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 * 60 * 24 * 2))
+OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 * 60 * 24 * 1))
 # OTP_EXPIRE_SECONDS = int(os.getenv("OTP_EXPIRE_SECONDS", 60 ))
-OTP_EXPIRE_SECONDS = 60
+# OTP_EXPIRE_SECONDS = 60
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/users/login")
@@ -45,7 +46,11 @@ def validate_token(token=Depends(oauth2_scheme)) -> str:
 
         jwt_expire = datetime.fromtimestamp(payload.get('jwt_expire'))
         if jwt_expire < datetime.now():
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Token expired")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token expired",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
         return {
             "user_id": payload.get('user_id'),
@@ -54,8 +59,9 @@ def validate_token(token=Depends(oauth2_scheme)) -> str:
 
     except:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Could not validate credentials"
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
 
@@ -65,12 +71,20 @@ def validate_otp(token=Depends(oauth2_scheme)) -> str:
 
         otp_expire = datetime.fromtimestamp(payload.get('otp_expire'))
         if otp_expire < datetime.now():
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="OTP expired")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="OTP expired",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
 
         return {
             "user_id": payload.get('user_id'),
             "role": payload.get('role'),
         }
 
-    except (jwt.PyJWTError, ValidationError):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials")
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )

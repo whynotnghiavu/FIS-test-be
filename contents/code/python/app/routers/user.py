@@ -1,5 +1,5 @@
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.orm import Session
 from ..database.get_db import get_db
 from typing import Annotated
@@ -17,6 +17,12 @@ from ..services.auth import validate_otp
 
 
 router = APIRouter(prefix="/users")
+
+
+
+
+ 
+
 
 
 @router.post('/register')
