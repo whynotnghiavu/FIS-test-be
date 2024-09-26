@@ -1,5 +1,4 @@
 import pyotp
-from ..logger import logger
 from fastapi import HTTPException, status
 from fastapi.responses import StreamingResponse
 
@@ -16,6 +15,16 @@ from .generate_random_string import generate_random_string
 import qrcode
 import base64
 from io import BytesIO
+
+
+
+
+from ..logger import setup_logger
+logger = setup_logger(__name__)
+
+ 
+
+
 
 
 def create_superuser(user: _schemas_user.UserRegister, db: Session):

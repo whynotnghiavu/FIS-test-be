@@ -17,6 +17,7 @@ def create_superuser():
     user = _schemas_user.UserRegister(
         email=os.getenv("EMAIL_ADMIN_DEFAULT", "admin@gmail.com"),
         password=os.getenv("PASSWORD_ADMIN_DEFAULT", "admin@A8"),
+        password_confirm=os.getenv("PASSWORD_ADMIN_DEFAULT", "admin@A8"),
         role=Role.ADMIN
     )
 
