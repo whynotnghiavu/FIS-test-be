@@ -18,8 +18,11 @@ logger = setup_logger(__name__)
 
 def create_db():
     logger.info("create_db")
+
+
 def create_superuser():
     logger.info("create_superuser")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -32,12 +35,10 @@ async def lifespan(app: FastAPI):
     print("Application shutdown")
 
 
-
 app = FastAPI(
     title='Test Kĩ Năng Backend',
     lifespan=lifespan
 )
-
 
 
 # Kiến thức về CORS
