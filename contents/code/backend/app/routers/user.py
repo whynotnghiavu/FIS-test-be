@@ -11,7 +11,7 @@ router = APIRouter(prefix="/users")
 def register(
 ):
     # Chức năng: Đăng ký
-    # CHỉ có Admin mới có thể đăng ký
+    # Chỉ có Admin mới có thể đăng ký
     logger.info("register")
     return "register"
 

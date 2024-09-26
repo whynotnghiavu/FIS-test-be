@@ -1,6 +1,8 @@
 import logging
 
 # Kiến thức về LOG
+
+
 def setup_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
@@ -14,7 +16,8 @@ def setup_logger(name):
         when="m",
         # 'when' có thể là 's' (giây), 'm' (phút), 'h' (giờ), 'd' (ngày), 'midnight' hoặc 'w0'-'w6' (ngày trong tuần)
         interval=5,
-        backupCount=7
+        backupCount=7,
+        delay=True
     )
 
     file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

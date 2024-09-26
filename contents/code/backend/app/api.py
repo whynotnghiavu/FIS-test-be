@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 
 
-# from .database.create_db import create_db
+from .database.create_db import create_db
 # from .seeders.create_superuser import create_superuser
 
 from .routers import user
@@ -15,9 +15,7 @@ from .routers import user
 from .logger import setup_logger
 logger = setup_logger(__name__)
 
-
-def create_db():
-    logger.info("create_db")
+ 
 
 
 def create_superuser():

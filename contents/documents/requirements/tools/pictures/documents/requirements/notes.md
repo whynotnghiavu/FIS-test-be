@@ -1,8 +1,5 @@
 <!-- Các chức năng: -->
-
-Đăng nhập
-Đăng ký
-Đăng xuất
+ 
 
 Xác minh OTP
 Thể loại, Bài viết, Bình luận
@@ -16,12 +13,7 @@ Quên mật khẩu
 JWT token
 Mail Mailhong
 Back end + Font end
-
-name
-<!-- username -->
-<!-- password -->
-<!-- email -->
-<!-- phone -->
+ 
 
 
 
@@ -57,20 +49,6 @@ name
 
 <!-- Chuyển từ http sang https -->
 
-<!-- Dùng alembic quản lý SQL -->
-<!-- Quản lý SQL .v1 .v2 Migration: Dùng `alembic` -->
-
-alembic init alembic
-
-alembic downgrade base
-alembic upgrade head
-
-alembic upgrade +1
-alembic downgrade -1
-
-alembic history
-
-alembic revision --autogenerate -m "add otp_recovery"
 
 <!-- @ Muốn dùng lệnh -->
 <!-- alembic upgrade head -->
