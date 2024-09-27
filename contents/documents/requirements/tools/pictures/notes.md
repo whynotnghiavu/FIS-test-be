@@ -4,7 +4,6 @@ python main.py
 npm start
 
 <!--  -->
-<!-- 0 VND; Thể loại, Bài viết, Bình luận -->
 
 <!-- Phân biệt thư viện và famework -->
 

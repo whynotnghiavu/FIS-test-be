@@ -47,18 +47,18 @@ services:
 
       - OTP_EXPIRE_SECONDS=${OTP_EXPIRE_SECONDS}
 
-  # frontend:
-  #   build:
-  #     context: "./frontend"
-  #   depends_on: 
-  #     - backend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - "./frontend:/app"
-  #   environment:
-  #     # - CHOKIDAR_USEPOLLING=true
-  #     - WATCHPACK_POLLING=true
+  frontend:
+    build:
+      context: "./frontend"
+    depends_on: 
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./frontend:/app"
+    environment:
+      # - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
 
 
        
