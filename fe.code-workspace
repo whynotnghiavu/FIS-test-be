@@ -1,0 +1,21 @@
+{
+  "extensions": { "recommendations": [] },
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "contents"
+    },
+    {
+      "path": "contents/code"
+    },
+    {
+      "path": "contents/code/frontend"
+    },
+    {
+      "path": "contents/code/frontend/src"
+    }
+  ],
+  "settings": {}
+}

@@ -17,22 +17,26 @@ import base64
 from io import BytesIO
 
 
-
-
 from ..logger import setup_logger
 logger = setup_logger(__name__)
 
- 
-
-
-
 
 def create_superuser(user: _schemas_user.UserRegister, db: Session):
+    if user.password != user.password_confirm:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Passwords do not match"
+        )
+
     count_user = db.query(models.User).count()
 
     if count_user == 0:
         user.password = cryptography.hash_password(user.password)
-        new_user = models.User(**user.model_dump())
+        new_user = models.User(
+            email=user.email,
+            password=user.password,
+            role=user.role,
+        )
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
@@ -196,7 +200,7 @@ def verify_recovery_otp(code: str, user_id: int, db: Session):
 
 
 def register(user: _schemas_user.UserRegister, db: Session):
-    if user.password != user.confirm_password:
+    if user.password != user.password_confirm:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Passwords do not match"
@@ -210,10 +214,13 @@ def register(user: _schemas_user.UserRegister, db: Session):
         )
 
     user.password = cryptography.hash_password(user.password)
-    new_user = models.User(**user.model_dump())
+    new_user = models.User(
+        email=user.email,
+        password=user.password,
+        role=user.role,
+    )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
     return auth.generate_token(new_user, time_otp_expire=0)
-

@@ -13,16 +13,15 @@ from ..services.get_user_id import GetUserId
 
 from ..models import Role
 from ..services.role_checker import RoleChecker
+from ..services.auth import validate_token
 from ..services.auth import validate_otp
 
 
+from ..logger import setup_logger
+logger = setup_logger(__name__)
+
+
 router = APIRouter(prefix="/users")
-
-
-
-
- 
-
 
 
 @router.post('/register')
@@ -40,6 +39,7 @@ def login(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db)
 ):
+    logger.debug(form_data)
     user = _schemas_user.UserLogin(
         email=form_data.username,
         password=form_data.password,

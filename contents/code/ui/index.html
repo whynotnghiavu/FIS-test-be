@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100">
+        <!-- Header -->
+        <header class="bg-white shadow-md p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="icon-book-open h-8 w-8 text-blue-500">📖</span>
+                    <span class="text-xl font-bold">BlogApp</span>
+                </div>
+                <div>
+                    <div id="auth-buttons" class="space-x-2">
+                        <button id="login-btn">Login</button>
+                        <button id="register-btn">Register</button>
+                    </div>
+                    <button id="logout-btn" class="hidden">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="container mx-auto mt-8 flex">
+            <!-- Sidebar with categories -->
+            <aside class="w-1-4 pr-8">
+                <h2 class="text-xl font-bold mb-4">Categories</h2>
+                <ul>
+                    <li class="mb-2"><a href="#" class="text-blue-500 hover:underline">Technology</a></li>
+                    <li class="mb-2"><a href="#" class="text-blue-500 hover:underline">Science</a></li>
+                    <li class="mb-2"><a href="#" class="text-blue-500 hover:underline">Health</a></li>
+                    <li class="mb-2"><a href="#" class="text-blue-500 hover:underline">Entertainment</a></li>
+                    <li class="mb-2"><a href="#" class="text-blue-500 hover:underline">Sports</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main content -->
+            <main class="w-3-4">
+                <!-- Login/Register form -->
+                <div id="auth-form" class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h2 id="form-title" class="text-xl font-bold mb-4">Login</h2>
+                    <form id="auth-form-content" class="space-y-4">
+                        <input type="email" id="email" placeholder="Email" class="input"/>
+                        <input type="password" id="password" placeholder="Password" class="input"/>
+                        <input type="password" id="confirm-password" placeholder="Confirm Password" class="input hidden"/>
+                        <button type="button" id="auth-submit-btn">Login</button>
+                    </form>
+                </div>
+
+                <!-- Posts -->
+                <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <h2 class="text-2xl font-bold mb-4">First Post</h2>
+                    <p class="mb-4">This is the content of the first post.</p>
+                    <p class="text-sm text-gray-500 mb-4">Posted by John Doe</p>
+
+                    <!-- Comments -->
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold mb-4">Comments</h3>
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="avatar">
+                                <img src="https://api.dicebear.com/6.x/initials/svg?seed=Jane%20Smith" alt="Avatar"/>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Jane Smith</p>
+                                <p>Great post!</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="avatar">
+                                <img src="https://api.dicebear.com/6.x/initials/svg?seed=Bob%20Johnson" alt="Avatar"/>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Bob Johnson</p>
+                                <p>I agree with Jane.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add comment form -->
+                    <form id="comment-form" class="mt-6 hidden">
+                        <textarea placeholder="Add a comment..." class="mb-2 textarea"></textarea>
+                        <button type="button" class="btn">Post Comment</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
