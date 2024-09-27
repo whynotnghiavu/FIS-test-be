@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import {   useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  // const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,7 +23,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const accessToken = localStorage.getItem("access_token"); // Lấy access_token từ localStorage
+    const accessToken = localStorage.getItem("access_token");
 
     if (formData.password !== formData.passwordConfirm) {
       setError("Passwords do not match");

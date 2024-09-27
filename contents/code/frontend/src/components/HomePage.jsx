@@ -30,25 +30,26 @@ const HomePage = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Posts</h2>
       {loading && <div>Loading...</div>}
       {error && <div className="alert alert-danger">{error}</div>}
       {posts.length === 0 && !loading && <div>No posts found.</div>}
       {posts.map((post) => (
         <div key={post.id} className="card mb-4">
           <div className="card-body">
-            <h5 className="card-title">{post.title}</h5>
-            <p className="card-text">{post.content}</p>
+            <h2 className="text-2xl font-bold mb-4">Post ID: {post.id} ,Title: {post.title}</h2>
+            <p className="mb-4">Content: {post.content}</p>
+
             <p className="card-text">
               <small>
                 By User ID: {post.user_id} on{" "}
                 {new Date(post.created_at).toLocaleDateString()}
               </small>
-            </p>  <p className="card-text">
-              <small>
-              Category ID: {post.category_id}  
-              </small>
             </p>
+
+            <p className="card-text">
+              <small>Category ID: {post.category_id}</small>
+            </p>
+
             <Comments postId={post.id} />
           </div>
         </div>
@@ -95,10 +96,14 @@ const Comments = ({ postId }) => {
         <div key={comment.id} className="border p-2 mb-2">
           <p>
             <strong>
-              {comment.user_id}
-<br/>
+            Comment ID:   {comment.id}
+              <br />
             </strong>
-              {comment.text}
+            <strong>
+              Comment by User ID:  {comment.user_id}
+              <br />
+            </strong>
+            Comment Text:  {comment.text}
           </p>
         </div>
       ))}
@@ -107,4 +112,3 @@ const Comments = ({ postId }) => {
 };
 
 export default HomePage;
-

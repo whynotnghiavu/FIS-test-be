@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const OtpPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { otp_qr_code } = location.state || {}; // Nhận mã QR từ state
+  const location = useLocation();
+
+  const { otp_qr_code } = location.state || {};
+
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -16,7 +18,7 @@ const OtpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const accessToken = localStorage.getItem("access_token"); // Lấy access_token từ localStorage
+    const accessToken = localStorage.getItem("access_token");
 
     try {
       const response = await fetch(
@@ -52,6 +54,17 @@ const OtpPage = () => {
 
   return (
     <div className="container mt-5">
+      {otp_qr_code && (
+        <div className="text-center mt-4">
+          <h2>OTP QR Code</h2>
+          <img
+            src={`data:image/png;base64,${otp_qr_code}`}
+            alt="OTP QR Code"
+            style={{ width: "150px", height: "150px" }}
+          />
+        </div>
+      )}
+
       <h2>Verify OTP</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       {success && <div className="alert alert-success">{success}</div>}
@@ -70,12 +83,6 @@ const OtpPage = () => {
           Verify OTP
         </button>
       </form>
-      {otp_qr_code && (
-        <div className="mt-4">
-          <h4>OTP QR Code</h4>
-          <img src={`data:image/png;base64,${otp_qr_code}`} alt="OTP QR Code" />
-        </div>
-      )}
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Dùng để điều hướng
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -9,7 +11,6 @@ const LoginPage = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // Hook điều hướng
 
   const handleChange = (e) => {
     setFormData({
@@ -48,14 +49,11 @@ const LoginPage = () => {
         setSuccess("Logged in successfully!");
         setError("");
 
-        // Lưu access_token vào localStorage hoặc SessionStorage để dùng cho các request sau
         localStorage.setItem("access_token", access_token);
 
         if (otp_qr_code) {
-          // Nếu có otp_qr_code, điều hướng đến trang hiển thị mã QR
           navigate("/otp", { state: { otp_qr_code } });
         } else {
-          // Nếu không có otp_qr_code, điều hướng về trang Home
           navigate("/");
         }
       } else {
