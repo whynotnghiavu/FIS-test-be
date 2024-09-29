@@ -1,7 +1,11 @@
 import Image from "next/image";
+import AboutPage from "@/components/About"
+
+
+
 
 export default function Home() {
   return (
-      <h1>Hello</h1>
+      <AboutPage />
   );
 }
