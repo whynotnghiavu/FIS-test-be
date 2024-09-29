@@ -1,8 +1,8 @@
 
-const zzzzzzzzzzzPage = () => { 
+export function zzzzzzzzzzzPage() {
+  
   return ( 
       <h2>zzzzzzzzzzz Page</h2> 
   );
 };
 
-export default zzzzzzzzzzzPage;
