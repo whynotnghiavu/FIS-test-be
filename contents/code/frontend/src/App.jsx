@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import LayoutHeader from "./components/LayoutHeader";
+
 import HomePage from "./components/HomePage";
 
 import OtpPage from "./components/OtpPage";
@@ -8,7 +10,7 @@ import OtpPage from "./components/OtpPage";
 function App() {
   return (
     <BrowserRouter>
-      {/* <LayoutHeader /> */}
+      <LayoutHeader />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         {/* <Route path="/register" element={<RegisterPage />}></Route> */}
