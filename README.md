@@ -27,3 +27,10 @@ Tên phổ biến
 <!-- Super user -->
 
 <!-- Thêm 1 vài dữ liệu ban đầu -->
+
+    // <Header isLoggedIn={true} userName="John Doe" />
+    // <Header isLoggedIn={false} />
+{/* <IndexPage/> */}
+
+{/* <QrOtpAuth/> */}
+{/* <BlogInterfaceComponent/> */}
