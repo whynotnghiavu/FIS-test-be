@@ -24,8 +24,36 @@ const posts = [
 
 
 export function Header() {
-return (
-  <h1>Hello</h1>
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+
+return ( 
+
+
+
+  
+  <header className="bg-white shadow-md p-4">
+  <div className="container mx-auto flex justify-between items-center">
+    <div className="flex items-center space-x-2">
+      <BookOpen className="h-8 w-8 text-blue-500" />
+      <span className="text-xl font-bold">BlogApp</span>
+    </div>
+    <div>
+      {isLoggedIn ? (
+        <Button onClick={() => setIsLoggedIn(false)}>Logout</Button>
+      ) : (
+        <div className="space-x-2">
+          <Button onClick={() => setShowRegister(false)}>Login</Button>
+          <Button onClick={() => setShowRegister(true)}>Register</Button>
+        </div>
+      )}
+    </div>
+  </div>
+</header>
+
+
+
 )
 }
 
@@ -35,31 +63,15 @@ return (
 
 
 export function BlogInterfaceComponent() {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
 
+
+  
   return (
     <div className="min-h-screen bg-gray-100">
 <Header/>
-{/* Header */}
-      <header className="bg-white shadow-md p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-blue-500" />
-            <span className="text-xl font-bold">BlogApp</span>
-          </div>
-          <div>
-            {isLoggedIn ? (
-              <Button onClick={() => setIsLoggedIn(false)}>Logout</Button>
-            ) : (
-              <div className="space-x-2">
-                <Button onClick={() => setShowRegister(false)}>Login</Button>
-                <Button onClick={() => setShowRegister(true)}>Register</Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
 
       <div className="container mx-auto mt-8 flex">
         {/* Sidebar with categories */}
