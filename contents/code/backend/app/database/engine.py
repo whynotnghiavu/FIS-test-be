@@ -18,7 +18,7 @@ SQLALCHEMY_DATABASE_URL = URL.create(
 ).render_as_string(hide_password=False)
 
 
-MYSQL_CONNECT_RETRIES = int(os.getenv("MYSQL_CONNECT_RETRIES", 5))
+MYSQL_CONNECT_RETRIES = int(os.getenv("MYSQL_CONNECT_RETRIES", 20))
 MYSQL_CONNECT_RETRY_DELAY = int(os.getenv("MYSQL_CONNECT_RETRY_DELAY", 5))
 
 
